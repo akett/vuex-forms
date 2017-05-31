@@ -7,11 +7,11 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import VuexInput from "./components/VuexInput.vue";
-Vue.component('vuex-input', VuexInput)
+import InputGroup from "./components/InputGroup.vue";
+Vue.component('input-group', InputGroup)
 
-import VuexForm from "./components/VuexForm.vue";
-Vue.component('vuex-form', VuexForm)
+import FormExample from "./components/FormExample.vue";
+Vue.component('form-example', FormExample)
 
 /* eslint-disable no-new */
 new Vue({

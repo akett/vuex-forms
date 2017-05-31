@@ -3,6 +3,8 @@ import Masker from "../utils/Masker";
 let VuexInput = {
     props: {
         id: {type: String, default: null},
+        name: {type: String, default: null},
+        label: {type: String, default: null},
         placeholder: {type: [String], default: ''},
         type: {type: String, default: 'text'},
         value: {type: [Number, Boolean, String], default: ''},
@@ -14,22 +16,16 @@ let VuexInput = {
         option_name: {type: [String], default: 'id'},
         option_value: {type: [String], default: 'id'},
         required: {type: [Boolean], default: false},
+        errors: {type: [String, Object, Array], default: null},
     },
     data: () => ({
         tempValue: null,
         activeKeyCode: 0,
     }),
-    mounted() {
-        this.tempValue = (this.type === 'checkbox' || this.type === 'radio')
-            ? this.value
-            : (this.value) ? this.value.toString() : ''
-        this.handleInput(this.tempValue, false)
-    },
     methods: {
         getCaretPosition() {
-            if (this.mask === false) {
-                return
-            }
+            if (this.mask === false) return
+
             Masker.readCaretPosition(this.$refs.input)
         },
 
@@ -81,6 +77,10 @@ let VuexInput = {
             this.emitEvent('input', event.target.checked ? this.trueValue : this.falseValue)
         },
 
+        handleRadio(event) {
+            this.emitEvent('input', event.target.value)
+        },
+
         handleBlur(event) {
             let newEvent = {
                 target: {
@@ -97,10 +97,16 @@ let VuexInput = {
         },
 
         emitEvent(type, payload) {
+            // emit input event to enable v-model functionality
             if (type === 'input') this.$emit('input', payload)
 
-            this.$emit('event', {type, payload, target: this.id})
+            this.$emit('event', {type, payload, target: this.type === 'radio' ? this.name : this.id})
         }
+    },
+    mounted() {
+        this.tempValue = (this.type === 'checkbox' || this.type === 'radio')
+            ? this.value
+            : (this.value) ? this.value.toString() : ''
     }
 }
 

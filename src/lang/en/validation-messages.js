@@ -1,7 +1,19 @@
 export default {
-    required: 'The :field field is required.',
-    minLength: 'The :field field must be greater than :min characters.',
-    maxLength: 'The :field field must be less than :max characters.',
-    minSize: 'The :field field must be greater than :min.',
-    maxSize: 'The :field field must be less than :max.',
+    alpha: 'The :input field can only consist of alphabetic characters.',
+    alphaNum: 'The :input field can only consist of alphanumeric characters.',
+    between: 'The :input field must be a number between :min and :max.',
+    email: 'The :input field must be a valid email address',
+    maxLength: 'The :input field cannot be longer than :max characters.',
+    minLength: 'The :input field must be at least :min characters long.',
+    numeric: 'The :input field can only consist of numeric characters',
+    required: 'The :input field is required.',
+    url: 'The :input field must be a valid URL.',
+    sameAs: 'The :input field must match the :eq field.'
 }
+/*
+    and
+    or
+    requiredIf,
+    requiredUnless,
+    sameAs
+*/

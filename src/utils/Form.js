@@ -1,60 +1,65 @@
-import Errors from "./Errors"
-import {validateModel} from "vuelidate"
 import Vue from "vue"
+import Errors from "./Errors"
+import {validationMixin} from "vuelidate"
 
 export default class Form {
-    constructor(instance, data, action, validations = null) {
-        // setup a vue instance for vuelidate
-        this._vm     = new Vue({
-            store: instance.$store,
-            data () {
-                return Object.assign({}, {
-                    _action: action,
-                    _original: data,
-                    _validations: validations
-                }, data);
-            },
-        })
-        this._action = action
+    constructor(instance, action, data, validations = null, overrideMessages = null, options = {}) {
+        this._store           = instance.$store
+        this._action          = action
+        this._data            = Object.assign({}, {_original: data}, data);
+        this.errors           = new Errors()
+        this.overrideMessages = overrideMessages
+        this.options          = {
+            validateOnInput: typeof options.validateOnInput !== 'undefined' ? options.validateOnInput : true,
+            validateOnBlur: typeof options.validateOnBlur !== 'undefined' ? options.validateOnBlur : true,
+        }
 
-        this._vm.$v  = validations !== null ? validateModel(this._vm, validations) : false
-
-        // define getters and setters for the passed data fields
+        // define getters and setters for data fields on `this`, so you can access your fields like so: {{ form.field1 }}
         for (let field in data) {
             if (data.hasOwnProperty(field)) {
                 Object.defineProperty(this, field, {
                     get: function () {
-                        return this._vm[field]
+                        return this._data[field]
                     },
                     set: function (value) {
-                        this._vm[field] = value
+                        this._data[field] = value
                     }
                 })
             }
         }
 
-        this.errors = new Errors(this._vm)
+        // create a new instance for Vuelidate to live in if validation rules were passed
+        if (validations !== null) {
+            this._validator = new Vue({
+                store: instance.$store,
+                mixins: [validationMixin],
+                validations: validations ? validations : {},
+                data: () => this._data
+            })
 
-        if (this._vm.$v !== false) {
-            setTimeout(function () {
-                this._vm.$v.$reset()
-            }.bind(this), 0)
+            // define getter for the Vuelidate $v object, for easy access
+            Object.defineProperty(this, '$v', {
+                get: () => this._validator.$v
+            })
         }
     }
 
+    hasValidator(form = this) {
+        return typeof form.$v !== 'undefined'
+    }
 
     data() {
         let data = {}
-        for (let field in this._vm._data._original) {
-            data[field] = this._vm[field]
+        for (let field in this._data._original) {
+            data[field] = this._data[field]
         }
 
         return data
     }
 
     reset() {
-        for (let field in this._vm._original) {
-            this[field] = ''
+        for (let field in this._data._original) {
+            this._data[field] = null
         }
 
         this.errors.clear()
@@ -63,42 +68,46 @@ export default class Form {
     }
 
     touch(target) {
-        if (this._vm.$v !== false && this._vm.$v.hasOwnProperty(target)) {
-            this._vm.$v[target].$touch()
-            this.errors.check(target)
+        if (this.hasValidator() && this.$v.hasOwnProperty(target)) {
+            this.$v[target].$touch()
+            this.errors.check(this, target)
         }
     }
 
-    listen(form, event) {
+    listen(event) {
         if (typeof event !== 'object') return
 
-        if (event.type === 'input') {
-            if (form._vm.$v !== false) {
-                form.touch(event.target)
-            }
-            form.onInput(event.target, event.payload)
-        }
-
-        if (event.type === 'blur') {
-            if (form._vm.$v !== false) {
-                form.touch(event.target)
-                form.errors.validate()
-            }
-            form.onBlur(event.target, event.payload)
+        switch (event.type) {
+            case 'input':
+                if (this.hasValidator() && this.options.validateOnInput) {
+                    this.touch(event.target)
+                    this.errors.validate(this, event.target)
+                }
+                this.onInput(event.target, event.payload)
+                break;
+            case 'blur':
+                if (this.hasValidator() && this.options.validateOnBlur) {
+                    this.touch(event.target)
+                    this.errors.validate(this, event.target)
+                }
+                this.onBlur(event.target, event.payload)
+                break;
         }
     }
 
     submit() {
-        // touch every field to make them dirty
-        if (this._vm.$v !== false) this._vm.$v.$touch()
-        // check every field for errors and update the error messages
-        let errors = this.errors.validate()
-        // if errors are detected reject before the API call
-        if (Object.keys(errors).length > 0) return Promise.reject()
+        // before submission, validate all the fields and abort if errors are found
+        if (this.hasValidator()) {
+            // touch all the fields so they will be validated
+            this.$v.$touch()
+            // validate then reject if errors exist
+            let errors = this.errors.validate(this)
+            if (Object.keys(errors).length > 0) return Promise.reject(errors)
+        }
 
-        // return a promise that dispatches the vuex action
+        // dispatch the action with the data fields as the argument
         return new Promise((resolve, reject) => {
-            return this._vm.$store.dispatch(this._action, {fields: this.data()})
+            return this._store.dispatch(this._action, {fields: this.data()})
                 .then(data => {
                     this.onSuccess(data)
                     resolve(data)
@@ -121,6 +130,12 @@ export default class Form {
 
     onReset() {
         // do something after reset
+    }
+
+    onValidate() {
+        // use to inject custom validation messages into the errors object
+        // expects an object, keyed by the field name with an array of strings as the value
+        return {}
     }
 
     onBlur(target, event) {

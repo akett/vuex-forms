@@ -8,11 +8,13 @@ const Masker = {
         Masker.caretPosition = caretPosition.get(el);
     },
     updateCaretPosition: (el, keyCode) => {
-        let movementOffset = (keyCode !== 8 && keyCode !== 46) ? 1 : (keyCode !== 8) ? 0 : -1;
+        let movementOffset = (keyCode !== 8 && keyCode !== 46)
+            ? 1
+            : (keyCode !== 8) ? 0 : -1;
         caretPosition.set(el, Masker.caretPosition + movementOffset);
     },
     applyMask: function (data, mask) {
-        // always remove the mask so we're working with data characters only
+        // remove the mask so we're only working with data characters
         data = Masker.removeMask(data, mask);
 
         let text = '', i, x, currentMaskChar, currentDataChar;
@@ -84,7 +86,7 @@ const Masker = {
         }
 
         return text;
-    },
+    }
 };
 
 export default Masker;
