@@ -1,6 +1,8 @@
-# vuex-model
+# Vuex Forms
 
-> Boilerplate for handling forms with vuex
+> Boilerplate for working with forms, validation, and persisting the form data in Vuex.
+
+Currently a work in progress.
 
 ## Build Setup
 
