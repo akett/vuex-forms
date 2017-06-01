@@ -1,8 +1,5 @@
 <template>
-    <div class="home">
-        <h1>Vuex Forms</h1>
-        <form-example></form-example>
-    </div>
+    <div class="home"></div>
 </template>
 
 <script>

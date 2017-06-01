@@ -7,8 +7,9 @@ import store from './store'
 
 Vue.config.productionTip = false
 
-import InputGroup from "./components/InputGroup.vue";
-Vue.component('input-group', InputGroup)
+import VuexForms from "../lib"
+
+Vue.use(VuexForms)
 
 import FormExample from "./components/FormExample.vue";
 Vue.component('form-example', FormExample)

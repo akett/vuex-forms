@@ -75,9 +75,9 @@
 </template>
 
 <script>
-    import VuexInput from "../mixins/vuex-input"
+    import VuexInputMixin from "./mixins/vuex-input"
     export default {
-        name: 'InputGroup',
-        mixins: [VuexInput]
+        name: 'VuexInput',
+        mixins: [VuexInputMixin]
     }
 </script>

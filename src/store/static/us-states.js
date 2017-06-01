@@ -1,4 +1,5 @@
 export default [
+    {name: 'Select a state', abbr: null},
     {name: 'Alabama', abbr: 'AL'},
     {name: 'Alaska', abbr: 'AK'},
     {name: 'American Samoa', abbr: 'AS'},

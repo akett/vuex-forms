@@ -30,6 +30,12 @@ a {
     color: #42b983;
 }
 
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    padding: 1rem 1rem 0.25rem;
+}
+
 .has-text-centered {
     text-align: center;
 }
@@ -78,22 +84,27 @@ a {
     }
 }
 
+@mixin form-control-style {
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    outline: none;
+    &:focus {
+        box-shadow: 0 0 1.25rem -0.5rem #000;
+    }
+}
+
 .form-control {
     font-family: inherit;
     font-size: inherit;
     &[type='text'], &[type='email'], &[type='password'], &[type='tel'] {
-        padding: 0.25rem;
-        border: 1px solid #ccc;
-        border-radius: 0.25rem;
-        width: 100%;
+        @include form-control-style;
     }
 }
 
 textarea.form-control, select.form-control {
-    padding: 0.25rem;
-    border: 1px solid #ccc;
-    border-radius: 0.25rem;
-    width: 100%;
+    @include form-control-style;
 }
 
 .form-errors {

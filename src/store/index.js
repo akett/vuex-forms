@@ -6,8 +6,10 @@ import {
     SUBMIT_FORM
 } from "./types"
 import {
+    accepted,
     alpha,
     alphaNum,
+    alphaDash,
     and,
     between,
     email,
@@ -20,7 +22,7 @@ import {
     requiredUnless,
     sameAs,
     url
-} from "vuelidate/lib/validators"
+} from "../../lib/validations"
 
 Vue.use(Vuex)
 
@@ -43,10 +45,10 @@ const store = new Vuex.Store({
             password_confirmation: null,
             shipping_method: null,
             receive_updates: null,
-            consent: null,
+            terms_and_conditions: null,
         },
         formTestRules: {
-            name: {required, minLength: minLength(2)},
+            name: {required, minLength: minLength(2), alphaDash},
             email: {required, email},
             phone: {required, minLength: minLength(10), maxLength: maxLength(10)},
             city: {required, minLength: minLength(3)},
@@ -56,7 +58,7 @@ const store = new Vuex.Store({
             password: {required, minLength: minLength(4)},
             password_confirmation: {required, sameAs: sameAs('password')},
             shipping_method: {required},
-            consent: {required},
+            terms_and_conditions: {accepted},
         }
     },
 
