@@ -1,9 +1,9 @@
 <template>
-    <div class="columns form is-desktop">
+    <div class="columns is-desktop">
         <div class="column is-6">
 
             <div class="has-text-centered" v-if="saved">
-                <h2>Server-side validations passed!</h2>
+                <h3>Server-side validations passed!</h3>
             </div>
             <form name="example-form" @submit.prevent="submitForm">
 
@@ -134,6 +134,8 @@
         </div>
         <div class="column is-6">
 
+            <h3>Schema</h3>
+
             <pre>{{ form.data() }}</pre>
 
             <validation-options :form="form"></validation-options>
@@ -142,10 +144,10 @@
 </template>
 
 <script>
-    import {Form} from "../../lib"
-    import states from "../store/static/us-states";
+    import {Form} from "../../../src"
+    import states from "../../store/static/us-states";
     export default {
-        name: 'FormExample',
+        name: 'BasicValidation',
         data () {
             return {
                 form: new Form(this, this.$store.state.formTest, {

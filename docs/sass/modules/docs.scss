@@ -1,0 +1,70 @@
+.docs {
+    width: 100%;
+    font-size: 0;
+}
+
+.navigation-pane {
+    display: none;
+    vertical-align: top;
+    width: 250px;
+    @media (min-width: 768px) {
+        display: inline-block;
+    }
+}
+
+.navigation-affix {
+    width: 250px;
+    height: 100vh;
+    overflow: auto;
+    border-right: 1px solid #ccc;
+    padding: 1rem;
+    font-size: 1rem;
+    &.affixed {
+        position: fixed;
+        left: 0;
+        top: 0;
+    }
+}
+
+.nav-title {
+    font-size: 1.25em;
+}
+
+.nav-list {
+    margin: 1rem 0;
+    padding: 0;
+    a {
+        color: $vue-dark;
+        &:hover {
+            color: $vue-light;
+        }
+    }
+    li {
+        display: block;
+        margin: 0.5rem 1rem;
+    }
+}
+
+.content-area {
+    display: block;
+    padding: 2rem 1rem;
+    font-size: 1rem;
+    h1 {
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid #ccc;
+    }
+    @media (min-width: 768px) {
+        display: inline-block;
+        vertical-align: top;
+        width: calc(100% - 250px);
+        padding: 2rem;
+    }
+}
+
+.doc-section {
+    margin-bottom: 5rem;
+}
+
+.doc-example {
+    margin-bottom: 3rem;
+}

@@ -1,0 +1,63 @@
+.form-group {
+    margin-bottom: 1rem;
+    label {
+        display: block;
+        margin-bottom: 0.2rem;
+        font-weight: bold;
+        font-size: 0.8rem;
+    }
+}
+
+@mixin form-control-style {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    width: 100%;
+    outline: none;
+    &:focus {
+        box-shadow: 0 0 1rem -0.25rem #42b983;
+    }
+    &.inline-control {
+        width: auto;
+    }
+}
+
+.form-control {
+    font-family: inherit;
+    font-size: inherit;
+    &[type='text'], &[type='email'], &[type='password'], &[type='tel'], &[type='number'] {
+        @include form-control-style;
+    }
+    &[type='radio'], &[type='checkbox'] {
+        outline-color: #42b983
+    }
+}
+
+textarea.form-control, select.form-control {
+    @include form-control-style;
+}
+
+.form-errors {
+    color: #c8302b;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    li {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.button {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    background: #eee;
+    outline: none;
+    &:hover {
+        cursor: pointer;
+        background: #ddd;
+    }
+    &:focus {
+        border-color: #42b983;
+    }
+}

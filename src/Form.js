@@ -1,4 +1,3 @@
-import Vue from "vue"
 import Errors from "./Errors"
 import {validationMixin} from "vuelidate"
 import validationMessages from "./lang/en/messages.js"
@@ -18,14 +17,25 @@ const defaultConfig = {
     validateOnSubmit: true,
     touchOnBlur: false,
     touchOnFocus: false,
-    inputDebounce: 300,
+    inputDebounce: 200,
 }
 
 const VUEX_FORM = 'VUEX'
 const AJAX_FORM = 'AJAX'
 
+let _cachedVue = null
+function getVue(rootVm) {
+    if (_cachedVue) return _cachedVue
+    let Vue = rootVm.constructor
+    /* istanbul ignore next */
+    while (Vue.super) Vue = Vue.super
+    _cachedVue = Vue
+    return Vue
+}
+
 export default class Form {
     constructor(vm, data, config = {}, apiHandler = null) {
+        let Vue = getVue(vm)
         // define core properties (mostly for reference)
         this.errors        = new Errors()
         this._config       = {}
@@ -39,7 +49,7 @@ export default class Form {
         this.setConfig(config)
         this.setupData(data)
         this.setupSubmitter(vm, apiHandler)
-        this.setupValidator()
+        this.setupValidator(Vue)
 
         // validate the form on load
         if (this._hasValidator && this._config.validateOnLoad) {
@@ -89,7 +99,7 @@ export default class Form {
         }
     }
 
-    setupValidator() {
+    setupValidator(Vue) {
         // create a Vue instance for Vuelidate to live in
         if (this._config.validations !== null) {
             let validations    = this._config.validations;
@@ -257,7 +267,7 @@ export default class Form {
                         // get any params for the rule, if available
                         let params = this.$v[field].$params[rule];
                         // remove the type attribute from the params list
-                        if (params.type) delete params.type
+                        if (params !== null && params.type) delete params.type
 
                         // now, replace the :attribute placeholder with the field name
                         // convert any and all underscores in the field name to spaces

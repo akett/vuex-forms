@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-family;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #fff;
+    color: #2c3e50;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 60px;
+}
+
+h1, h2 {
+    font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 0.5em;
+    padding: 0;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+a {
+    color: $vue-light;
+    text-decoration: none;
+    &:hover {
+        cursor: pointer;
+        color: adjust_hue($vue-light, 180);
+    }
+}
+
+fieldset {
+    margin: 1rem 0;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    background: #FAFAFA;
+    padding: 1rem 1rem 0.25rem;
+    legend {
+        font-variant: all-small-caps;
+        font-weight: bold;
+        color: #42b983;
+    }
+}
+
+.has-text-centered {
+    text-align: center;
+}
+
+.has-text-left {
+    text-align: left;
+}
+
+.has-text-right {
+    text-align: right;
+}

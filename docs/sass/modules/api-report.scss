@@ -1,0 +1,21 @@
+.api-reports {
+    position: fixed;
+    top: 0;
+    right: 1rem;
+}
+
+.api-status {
+    margin-top: 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: #41b883;
+    color: #FFF;
+}
+
+.api-error {
+    margin-top: 1rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    background: #b83146;
+    color: #FFF;
+}

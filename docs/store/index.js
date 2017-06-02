@@ -26,7 +26,7 @@ import {
     requiredUnless,
     sameAs,
     url
-} from "../../lib/validations"
+} from "../../src/validators"
 
 Vue.use(Vuex)
 

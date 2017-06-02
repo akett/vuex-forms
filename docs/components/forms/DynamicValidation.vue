@@ -40,10 +40,10 @@
 </template>
 
 <script>
-    import {Form} from "../../lib"
-    import {required, minLength} from "../../lib/validations"
+    import Form from "../../../src/Form"
+    import {required, minLength} from "../../../src/validators/index"
     export default {
-        name: 'FormExample2',
+        name: 'DynamicValidation',
         data () {
             return {
                 form: new Form(this, {

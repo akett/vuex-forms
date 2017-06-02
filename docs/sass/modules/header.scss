@@ -1,0 +1,115 @@
+$header-link-color: adjust_hue($vue-light, 90);
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.header {
+    position: relative;
+    &:before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to right bottom, $saturated-vue-light 0%, $saturated-vue-dark 100%);
+        animation: fade 10s ease infinite;
+        will-change: opacity;
+    }
+    color: #2c3e50;
+    padding: 60px 1rem;
+    text-align: center;
+    font-size: 1.25rem;
+    min-height: 100vh;
+    a {
+        color: $header-link-color;
+        &:hover {
+            color: adjust_hue($header-link-color, 90);
+        }
+    }
+}
+
+.header-centered {
+    display: block;
+    width: 100%;
+    @media (min-width: 700px) and (min-height: 730px) {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+    }
+}
+
+.header-logo {
+    margin-bottom: 4rem;
+}
+
+.logo {
+    display: inline-block;
+    vertical-align: middle;
+    height: calc(8vw + 6vh);
+    max-height: 120px;
+}
+
+.header-title {
+    color: $vue-dark;
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: 700;
+    font-size: calc(16px + 4vw + 3vh);
+    font-variant: all-small-caps;
+    margin: 0;
+    .lighter {
+        color: saturate(darken($vue-light, 15), 40);
+    }
+}
+
+.version {
+    display: block;
+    text-align: right;
+    font-size: 1rem;
+    font-variant: normal;
+}
+
+.slogan {
+    color: darken($vue-dark, 25);
+    font-size: 1.1em;
+}
+
+.features {
+    color: darken($vue-dark, 10);
+    text-align: left;
+    width: 100%;
+    max-width: 800px;
+    margin: 4rem auto;
+    font-size: 0.82em;
+    .columns {
+        margin: 0;
+    }
+}
+
+.features-title {
+    font-weight: 500;
+}
+
+.feature-list {
+    margin: 0;
+    padding: 0;
+    list-style: square;
+    & > li {
+        display: list-item;
+        margin: 0.5rem 1rem;
+    }
+}

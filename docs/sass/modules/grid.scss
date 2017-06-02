@@ -1,0 +1,27 @@
+@media (min-width: 567px) {
+    .columns {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0 -1rem;
+        &.is-desktop {
+            @media (max-width: 1023px) {
+                display: block;
+                & > .column {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    .column {
+        display: block;
+        width: auto;
+        padding: 0 1rem;
+        @for $grid from 1 to 12 {
+            &.is-#{$grid} {
+                width: ($grid/12) * 100%;
+            }
+        }
+    }
+}
