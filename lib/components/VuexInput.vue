@@ -7,9 +7,8 @@
                        :name="name"
                        :id="name + option[option_name]"
                        :value="option[option_value]"
-                       :selected="value === option[option_value]"
+                       :checked="value === option[option_value]"
                        @change="handleRadio"
-                       @blur="handleBlur"
                        class="form-control">
                 {{ option[option_name] }}
             </label>
@@ -20,11 +19,10 @@
                        :id="id"
                        :name="name"
                        :type="type"
-                       :value="tempValue"
+                       :value="value"
                        :checked="value === trueValue"
                        :required="required"
                        @change="handleCheckbox"
-                       @blur="handleBlur"
                        class="form-control">
                 {{ label }}
             </label>
@@ -35,10 +33,11 @@
             <select v-if="type === 'select'"
                     :id="id"
                     :name="name"
-                    :value="tempValue"
+                    :value="value"
                     :required="required"
                     @change="handleInput($event.target.value)"
                     @blur="handleBlur"
+                    @focus="handleFocus"
                     class="form-control">
                 <option v-for="option in options" :value="option[option_value]" v-text="option[option_name]"></option>
             </select>
@@ -53,6 +52,7 @@
                       @input="handleInput($event.target.value)"
                       @keydown="handleKeyDown($event)"
                       @blur="handleBlur"
+                      @focus="handleFocus"
                       class="form-control"></textarea>
 
             <input v-if="type !== 'select' && type !== 'textarea'"
@@ -66,6 +66,7 @@
                    @input="handleInput($event.target.value)"
                    @keydown="handleKeyDown($event)"
                    @blur="handleBlur"
+                   @focus="handleFocus"
                    class="form-control">
         </span>
         <ul class="form-errors" v-if="errors">

@@ -11,8 +11,12 @@ import VuexForms from "../lib"
 
 Vue.use(VuexForms)
 
+import ValidationOptions from "./components/ValidationOptions.vue";
 import FormExample from "./components/FormExample.vue";
+import FormExample2 from "./components/FormExample2.vue";
+Vue.component('validation-options', ValidationOptions)
 Vue.component('form-example', FormExample)
+Vue.component('form-example2', FormExample2)
 
 /* eslint-disable no-new */
 new Vue({
