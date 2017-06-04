@@ -10,6 +10,8 @@ Vue.use(VueHighlightJS)
 Vue.use(VuexForms)
 
 Vue.config.productionTip = false
+Vue.config.debug = true
+Vue.config.devtools = true
 
 import ApiReporter from "./components/ApiReporter.vue";
 import AppHeader from "./components/layout/AppHeader.vue";

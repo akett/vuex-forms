@@ -49,9 +49,17 @@
     display: block;
     padding: 2rem 1rem;
     font-size: 1rem;
+    line-height: 1.5em;
     h1 {
         padding-bottom: 0.5rem;
         border-bottom: 1px solid #ccc;
+        margin-bottom: 4rem;
+    }
+    h2 {
+        margin-bottom: 2rem;
+    }
+    h1, h2, h3 {
+        font-weight: 500;
     }
     @media (min-width: 768px) {
         display: inline-block;
@@ -66,5 +74,5 @@
 }
 
 .doc-example {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
 }

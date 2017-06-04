@@ -12,6 +12,7 @@ const VuexForms = {
 };
 
 export {
+    VuexForms,
     Form,
     Errors
 }

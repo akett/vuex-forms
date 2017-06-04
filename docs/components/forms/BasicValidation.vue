@@ -65,6 +65,7 @@
                                    :errors="form.errors.get('zip')"
                                    @event="form.listen($event)"
                         ></vuex-text>
+
                     </div>
                     <div class="column is-6">
 

@@ -18,17 +18,18 @@
                     <div class="column is-6">
                         <ul class="feature-list">
                             <li>Model based forms & validations</li>
-                            <li>Dispatches a Vuex action on submit</li>
-                            <li>Configurable for AJAX instead of Vuex</li>
-                            <li>Loosely-coupled form components</li>
-                            <li>Minimal logic in components</li>
+                            <li>Use any data source to populate your forms</li>
+                            <li>Dispatch form data via Vuex or AJAX</li>
+                            <li>Loosely-coupled presentation system</li>
+                            <li>Minimal logic required for components</li>
                             <li>Mixins for quick custom components</li>
                             <li>Easy to use input masking</li>
                         </ul>
                     </div>
                     <div class="column is-6">
                         <ul class="feature-list">
-                            <li>Robust validation, powered by <a href="https://monterail.github.io/vuelidate/">Vuelidate</a>
+                            <li>Robust validation, powered by <a
+                                    href="https://monterail.github.io/vuelidate/">Vuelidate</a>
                             </li>
                             <li>20+ <a href="https://laravel.com/">Laravel</a> inspired validation rules</li>
                             <li>Template-decoupled validation messages</li>

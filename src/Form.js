@@ -35,7 +35,7 @@ function getVue(rootVm) {
 
 export default class Form {
     constructor(vm, data, config = {}, apiHandler = null) {
-        let Vue = getVue(vm)
+        let Vue            = getVue(vm)
         // define core properties (mostly for reference)
         this.errors        = new Errors()
         this._config       = {}
@@ -87,7 +87,8 @@ export default class Form {
     // Note: this will give priority to Vuex if config options for both Vuex and AJAX are passed.
     setupSubmitter(vm, apiHandler) {
         if (this._config.vuexAction === false && this._config.ajaxURL === false) {
-            throw "You must specify either a Vuex action or an AJAX action in the form config."
+            this._submitter = false;
+            return
         }
         this._submitter = this._config.vuexAction !== false ? VUEX_FORM : AJAX_FORM
         // if vuex, save a reference to the $store
