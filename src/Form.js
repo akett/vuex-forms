@@ -214,6 +214,11 @@ export default class Form {
             if (Object.keys(errors).length > 0) return Promise.reject(errors)
         }
 
+        if(this._submitter === null) {
+            console.log('This form isn\'t configured to submit to anything!')
+            return false;
+        }
+
         // dispatch the action with the data fields as the argument
         return new Promise((resolve, reject) => {
             return this._vuex.dispatch(this._config.vuexAction, this.data())

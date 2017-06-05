@@ -12,6 +12,13 @@ const VuexForms = {
         Vue.component('vuex-checkbox', VuexCheckbox)
         Vue.component('vuex-radio', VuexRadio)
         Vue.component('vuex-select', VuexSelect)
+        Vue.directive('vuex-input', {
+            bind: (el, binding, value) => {
+                console.log(el)
+                console.log(binding)
+                console.log(value)
+            }
+        })
     }
 };
 

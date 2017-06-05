@@ -6,7 +6,7 @@
                   ref="input"
                   :id="id"
                   :name="name"
-                  :value="tempValue"
+                  v-model="tempValue"
                   :placeholder="placeholder"
                   :required="required"
                   @input="handleInput"
