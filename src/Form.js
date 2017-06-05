@@ -146,8 +146,12 @@ export default class Form {
     // </form>
     reset() {
         for (let field in this._data._original) {
-            this._data[field]            = null
-            this._validator._data[field] = null
+            if (this._data.hasOwnProperty(field)) {
+                this._data[field] = null
+            }
+            if (this._validator.hasOwnProperty(field)) {
+                this._validator._data[field] = null
+            }
         }
 
         this.errors.clear()
@@ -192,9 +196,13 @@ export default class Form {
     listen(event) {
         if (typeof event !== 'object') return
 
+        let field = (event.target.indexOf('.') !== -1)
+            ? event.target.split('.').reduce((o, i) => o[i], this.$v)
+            : this.$v[event.target];
+
         switch (event.type) {
             case 'input':
-                if (this.hasValidator(event.target)) this.$v[event.target].$touch()
+                if (this.hasValidator(event.target)) field.$touch()
                 clearTimeout(this._timers.inputDebounce)
                 this._timers.inputDebounce = setTimeout(() => {
                     if (this.hasValidator(event.target) && this._config.validateOnInput) this.validate(event.target)
@@ -203,14 +211,14 @@ export default class Form {
                 break;
             case 'blur':
                 if (this.hasValidator(event.target)) {
-                    if (this._config.touchOnBlur) this.$v[event.target].$touch()
+                    if (this._config.touchOnBlur) field.$touch()
                     if (this._config.validateOnBlur) this.validate(event.target)
                 }
                 this.onBlur(event.target, event.payload)
                 break;
             case 'focus':
                 if (this.hasValidator(event.target)) {
-                    if (this._config.touchOnFocus) this.$v[event.target].$touch()
+                    if (this._config.touchOnFocus) field.$touch()
                     if (this._config.validateOnFocus) this.validate(event.target)
                 }
                 this.onFocus(event.target, event.payload)
@@ -220,9 +228,23 @@ export default class Form {
 
     // checks if the form is under any validation, optionally check if a specific field is under validation
     hasValidator(field = null) {
+        if (this._hasValidator && field !== null && field.indexOf('.') !== -1) {
+            return typeof (field.split('.').reduce((o, i) => o[i], this.$v)) !== 'undefined';
+        }
         return field !== null
             ? this._hasValidator && this.$v.hasOwnProperty(field)
             : this._hasValidator
+    }
+
+    // use a level count to construct an array of possible validations
+    readValidations(originalValidations) {
+        console.log(Object.getOwnPropertyNames(originalValidations));
+        for (let prop in originalValidations) {
+            if (originalValidations.hasOwnProperty(prop)
+                && typeof originalValidations[prop] === 'object') {
+                this.readValidations(originalValidations[prop])
+            }
+        }
     }
 
     // Reads the validation errors and translates them into validation messages
@@ -239,40 +261,63 @@ export default class Form {
             ? this._validator.$options.validations(this._validator)
             : this._validator.$options.validations
 
+        console.log(Object.entries(originalValidations));
+
+        for (let valid in originalValidations) {
+            if (originalValidations.hasOwnProperty(valid)) {
+                this.readValidations(originalValidations)
+            }
+        }
+
         // use all of the original validations unless a target field is specified
-        let validations = targetField === null
-            ? originalValidations
-            : {[targetField]: originalValidations[targetField]}
+
+        let validations = {};
+        if (targetField !== null && targetField.indexOf('.') !== -1) {
+            validations = {[targetField]: targetField.split('.').reduce((o, i) => o[i], originalValidations)}
+        } else if (targetField !== null) {
+            validations = {[targetField]: originalValidations[targetField]}
+        } else {
+            validations = originalValidations
+        }
+
+        // TODO: nested validations!!!
 
         let errors = {}
         for (let field in validations) {
             // only continue if the validator reports that the field has an error
-            if (this.$v.hasOwnProperty(field) && this.$v[field].$error === true) {
+            let fieldRef = field.indexOf('.') !== -1
+                ? field.split('.').reduce((o, i) => o[i], this.$v)
+                : this.$v[field]
+            if (fieldRef && fieldRef.$error === true) {
                 // get the rules for this field
                 let rules = validations[field]
+                console.log(rules)
 
                 // loop through each rule and translate any errors into messages
                 let messages = []
                 for (let rule in rules) {
                     // only continue if the validator reports a false value for this rule
-                    if (rules.hasOwnProperty(rule) && this.$v[field][rule] === false) {
+                    if (rules.hasOwnProperty(rule) && fieldRef[rule] === false) {
 
                         // get the override message for the [field][rule] pair if it exists, or use the default
                         // message for the rule. If a message can't be resolved, use a generic default instead.
                         let message = (this._config.overrideMessages[field] && this._config.overrideMessages[field][rule])
                             ? this._config.overrideMessages[field][rule]
                             : (this._config.defaultMessages[rule])
-                                          ? this._config.defaultMessages[rule]
-                                          : 'The :attribute field has an error';
+                                ? this._config.defaultMessages[rule]
+                                : 'The :attribute field has an error';
 
                         // get any params for the rule, if available
-                        let params = this.$v[field].$params[rule];
+                        let params = fieldRef.$params[rule];
                         // remove the type attribute from the params list
                         if (params !== null && params.type) delete params.type
 
                         // now, replace the :attribute placeholder with the field name
                         // convert any and all underscores in the field name to spaces
-                        message = message.replace(":attribute", field.replace(/_/g, ' '))
+                        let fieldName = field.indexOf('.') !== -1
+                            ? field.split('.').reverse()[0]
+                            : field;
+                        message       = message.replace(":attribute", fieldName.replace(/_/g, ' '))
 
                         // finally, replace any and all :param placeholders with the param's value
                         for (let param in params) {

@@ -10,20 +10,22 @@ Vue.use(VueHighlightJS)
 Vue.use(VuexForms)
 
 Vue.config.productionTip = false
-Vue.config.debug = true
-Vue.config.devtools = true
+Vue.config.debug         = true
+Vue.config.devtools      = true
 
 import ApiReporter from "./components/ApiReporter.vue";
 import AppHeader from "./components/layout/AppHeader.vue";
 import ValidationOptions from "./components/ValidationOptions.vue";
 import BasicValidation from "./components/forms/BasicValidation.vue";
 import DynamicValidation from "./components/forms/DynamicValidation.vue";
+import NestedExample from "./components/forms/NestedExample.vue";
 
 Vue.component('api-reporter', ApiReporter)
 Vue.component('app-header', AppHeader)
 Vue.component('validation-options', ValidationOptions)
 Vue.component('basic-validation', BasicValidation)
 Vue.component('dynamic-validation', DynamicValidation)
+Vue.component('nested-example', NestedExample)
 
 /* eslint-disable no-new */
 new Vue({

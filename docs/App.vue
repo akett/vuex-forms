@@ -48,8 +48,12 @@
                             about accidentally mutating that data until you're ready to dispatch it back into your store.
                         </p>
                         <p>
-                            Easily validate your forms on the client-side and server-side. Any validation messages will be
-                            read from the server response and mapped to the appropriate form fields.
+                            Easily validate your forms on the client and server side. For client-side, simply
+                            pass a <kbd>validations</kbd> object in the <kbd>Form</kbd>'s config options.
+                            Read the Vuelidate docs to learn more about the client validation system.
+                            For server-side, read the section on server-side validating to learn what kind of
+                            response VuexForms expects in order to properly map the validation messages
+                            to the appropriate form fields.
                         </p>
                     </div>
 
@@ -131,6 +135,12 @@ var Component = Vue.extend({
                 <a class="anchor" name="examples"></a>
                 <h1>Examples</h1>
                 <section class="doc-section">
+
+                    <div class="doc-example">
+                        <a class="anchor" name="nested-example"></a>
+                        <h2>Nested Data</h2>
+                        <nested-example></nested-example>
+                    </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="basic-validation-example"></a>
