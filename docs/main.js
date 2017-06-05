@@ -15,14 +15,18 @@ Vue.config.devtools      = true
 
 import ApiReporter from "./components/ApiReporter.vue";
 import AppHeader from "./components/layout/AppHeader.vue";
+import DocExample from "./components/layout/DocExample.vue";
 import ValidationOptions from "./components/ValidationOptions.vue";
-import BasicValidation from "./components/forms/BasicValidation.vue";
-import DynamicValidation from "./components/forms/DynamicValidation.vue";
-import NestedExample from "./components/forms/NestedExample.vue";
+import BasicUsage from "./components/examples/BasicUsage.vue";
+import NestedExample from "./components/examples/NestedExample.vue";
+import BasicValidation from "./components/examples/BasicValidation.vue";
+import DynamicValidation from "./components/examples/DynamicValidation.vue";
 
 Vue.component('api-reporter', ApiReporter)
 Vue.component('app-header', AppHeader)
+Vue.component('doc-example', DocExample)
 Vue.component('validation-options', ValidationOptions)
+Vue.component('basic-usage', BasicUsage)
 Vue.component('basic-validation', BasicValidation)
 Vue.component('dynamic-validation', DynamicValidation)
 Vue.component('nested-example', NestedExample)

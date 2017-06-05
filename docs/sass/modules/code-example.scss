@@ -1,0 +1,31 @@
+.example-tabs {
+    font-size: 0;
+    border-bottom: 1px solid #CCC;
+    li {
+        margin: 0 0 -1px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        border: 1px solid transparent;
+        user-select: none;
+        &:hover {
+            cursor: pointer;
+            background-color: #fafafa;
+            border-bottom-color: #ccc;
+            color: $vue-light;
+        }
+        &.active-tab {
+            background-color: #FFF;
+            border-color: #ccc;
+            border-bottom-color: #FFF;
+        }
+    }
+}
+
+.example-display {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 1rem;
+    .code {
+        margin: -1rem;
+    }
+}

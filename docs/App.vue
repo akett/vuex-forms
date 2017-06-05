@@ -16,8 +16,10 @@
 
                     <a href="#examples" class="nav-title">Examples</a>
                     <ul class="nav-list">
+                        <li><a href="#basic-example">Basic Example</a></li>
                         <li><a href="#basic-validation-example">Basic Validation</a></li>
                         <li><a href="#dynamic-validation-example">Dynamic Validation</a></li>
+                        <li><a href="#nested-example">Nested Data</a></li>
                     </ul>
 
                     <a href="#validation" class="nav-title">Form Components</a>
@@ -137,9 +139,9 @@ var Component = Vue.extend({
                 <section class="doc-section">
 
                     <div class="doc-example">
-                        <a class="anchor" name="nested-example"></a>
-                        <h2>Nested Data</h2>
-                        <nested-example></nested-example>
+                        <a class="anchor" name="basic-example"></a>
+                        <h2>Basic Example</h2>
+                        <basic-usage></basic-usage>
                     </div>
 
                     <div class="doc-example">
@@ -152,59 +154,12 @@ var Component = Vue.extend({
                         <a class="anchor" name="dynamic-validation-example"></a>
                         <h2>Dynamic Validation</h2>
                         <dynamic-validation></dynamic-validation>
-                        <pre v-highlightjs>
-<code class="html">&lt;form name="example-form-2" @submit.prevent="form.submit()"&gt;
-    &lt;vuex-text type="number"
-               label="Minimum Name Length"
-               id="nameLength"
-               name="nameLength"
-               v-model="form.nameLength"
-               :errors="form.errors.get('nameLength')"
-               @event="form.listen($event)"
-    &gt;&lt;/vuex-text&gt;
+                    </div>
 
-    &lt;vuex-text label="Name"
-               id="name"
-               name="name"
-               v-model.trim="form.name"
-               :errors="form.errors.get('name')"
-               @event="form.listen($event)"
-    &gt;&lt;/vuex-text&gt;
-
-    &lt;div class="has-text-centered"&gt;
-        &lt;button type="submit" class="button"&gt;Submit&lt;/button&gt;
-        &lt;button type="reset" class="button" @click="form.reset()"&gt;Reset&lt;/button&gt;
-    &lt;/div&gt;
-&lt;/form&gt;
-</code>
-</pre>
-                        <pre v-highlightjs>
-<code class="javascript">import { Form } from "vuex-forms"
-import { required, minLength } from "vuex-forms/lib/validations"
-export default {
-  name: 'DynamicValidation',
-  data () {
-    return {
-      form: new Form(this, {
-        nameLength: 2,
-        name: '',
-      }, {
-        vuexAction: 'SUBMIT_FORM',
-        validations: (validator) => {
-          return {
-            nameLength: {required},
-            name: {
-              required,
-              minLength: minLength(parseInt(validator.nameLength))
-            }
-          }
-        }
-      }),
-    }
-  }
-}
-</code>
-</pre>
+                    <div class="doc-example">
+                        <a class="anchor" name="nested-example"></a>
+                        <h2>Nested Data</h2>
+                        <nested-example></nested-example>
                     </div>
 
                 </section>

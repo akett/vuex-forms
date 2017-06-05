@@ -44,17 +44,16 @@
                                    @event="form.listen($event)"
                         ></vuex-text>
 
-                        <vuex-input type="select"
-                                    label="State"
-                                    id="state"
-                                    name="state"
-                                    :options="states"
-                                    option_name="name"
-                                    option_value="abbr"
-                                    v-model="form.state"
-                                    :errors="form.errors.get('state')"
-                                    @event="form.listen($event)"
-                        ></vuex-input>
+                        <vuex-select label="State"
+                                     id="state"
+                                     name="state"
+                                     :options="states"
+                                     option_name="name"
+                                     option_value="abbr"
+                                     v-model="form.state"
+                                     :errors="form.errors.get('state')"
+                                     @event="form.listen($event)"
+                        ></vuex-select>
 
                         <vuex-text label="Zip Code"
                                    mask="#####-####"
@@ -96,8 +95,8 @@
                                    @event="form.listen($event)"
                         ></vuex-text>
 
-                        <vuex-input type="radio"
-                                    label="Shipping Method"
+                        <vuex-radio label="Shipping Method"
+                                    id="shipping_method"
                                     name="shipping_method"
                                     :options="shipping_options"
                                     option_name="name"
@@ -105,25 +104,24 @@
                                     v-model="form.shipping_method"
                                     :errors="form.errors.get('shipping_method')"
                                     @event="form.listen($event)"
-                        ></vuex-input>
+                        ></vuex-radio>
 
-                        <vuex-input type="checkbox"
-                                    label="Receive Updates"
-                                    id="receive_updates"
-                                    name="receive_updates"
-                                    v-model="form.receive_updates"
-                                    :errors="form.errors.get('receive_updates')"
-                                    @event="form.listen($event)"
-                        ></vuex-input>
+                        <vuex-checkbox label="Receive Updates"
+                                       id="receive_updates"
+                                       name="receive_updates"
+                                       v-model="form.receive_updates"
+                                       :errors="form.errors.get('receive_updates')"
+                                       @event="form.listen($event)"
+                        ></vuex-checkbox>
 
-                        <vuex-input type="checkbox"
-                                    label="I agree the Terms & Conditions"
-                                    id="terms_and_conditions"
-                                    name="terms_and_conditions"
-                                    v-model="form.terms_and_conditions"
-                                    :errors="form.errors.get('terms_and_conditions')"
-                                    @event="form.listen($event)"
-                        ></vuex-input>
+                        <vuex-checkbox label="I agree the Terms & Conditions"
+                                       id="terms_and_conditions"
+                                       name="terms_and_conditions"
+                                       v-model="form.terms_and_conditions"
+                                       :errors="form.errors.get('terms_and_conditions')"
+                                       @event="form.listen($event)"
+                        ></vuex-checkbox>
+
                     </div>
                 </div>
 

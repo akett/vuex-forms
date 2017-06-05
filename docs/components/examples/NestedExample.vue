@@ -4,7 +4,6 @@
             <form name="example-form" @submit.prevent="form.submit()">
 
                 <vuex-text label="Name"
-                           id="name"
                            name="name"
                            v-model="form.name"
                            :errors="form.errors.get('name')"
@@ -12,7 +11,6 @@
                 ></vuex-text>
 
                 <vuex-text label="Nested Name"
-                           id="nested.data.is.nested.name"
                            name="nested.data.is.nested.name"
                            v-model="form.nested.data.is.nested.name"
                            :errors="form.errors.get('nested.data.is.nested.name')"
@@ -20,7 +18,6 @@
                 ></vuex-text>
 
                 <vuex-text label="Nested City"
-                           id="nested.data.is.nested.city"
                            name="nested.data.is.nested.city"
                            v-model="form.nested.data.is.nested.city"
                            :errors="form.errors.get('nested.data.is.nested.city')"
@@ -64,14 +61,13 @@
                         }
                     }
                 }, {
-                    vuexAction: 'SUBMIT_FORM',
                     validations: {
                         name: {required},
                         nested: {
                             data: {
                                 is: {
                                     nested: {
-                                        name: {required},
+                                        name: {required, minLength: minLength(5)},
                                         city: {required},
                                     }
                                 }

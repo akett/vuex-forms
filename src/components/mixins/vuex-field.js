@@ -18,7 +18,7 @@ export default {
     methods: {
 
         handleInput(event) {
-            return this.inputEvent(event.target.value);
+            return this.inputEvent(this.createEvent(event, 'input'));
         },
 
         handleBlur(event) {
@@ -29,9 +29,9 @@ export default {
             return this.focusEvent(this.createEvent(event, 'focus'))
         },
 
-        inputEvent(value) {
-            this.tempValue = value
-            this.emitEvent('input', value)
+        inputEvent(event) {
+            this.tempValue = event.target.value
+            this.emitEvent('input', event)
         },
 
         blurEvent(event) {
@@ -47,16 +47,17 @@ export default {
                 type,
                 target: {
                     id: event.target.id,
+                    name: event.target.name,
                     value: event.target.value
                 }
             }
         },
 
         emitEvent(type, payload) {
-            // emit input event to enable v-model functionality
-            if (type === 'input') this.$emit('input', payload)
+            // emit input event for v-model
+            if (type === 'input') this.$emit('input', payload.target.value)
 
-            this.$emit('event', {type, payload, target: this.type === 'radio' ? this.name : this.id})
+            this.$emit('event', {type, field: this.name, payload})
         }
     }
 }

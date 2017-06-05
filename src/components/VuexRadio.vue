@@ -1,0 +1,26 @@
+<template>
+    <div class="form-group">
+        <label v-html="label"></label>
+        <label v-for="option in options" :for="(id || name) + option[option_name]">
+            <input type="radio"
+                   :name="name"
+                   :id="(id || name) + option[option_name]"
+                   :value="option[option_value]"
+                   :checked="value === option[option_value]"
+                   @change="handleRadio"
+                   class="form-control">
+            {{ option[option_name] }}
+        </label>
+        <ul class="form-errors" v-if="errors">
+            <li v-for="error in errors">{{ error }}</li>
+        </ul>
+    </div>
+</template>
+
+<script>
+    import VuexRadioMixin from "./mixins/vuex-radio"
+    export default {
+        name: 'VuexRadio',
+        mixins: [VuexRadioMixin()]
+    }
+</script>

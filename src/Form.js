@@ -103,7 +103,9 @@ export default class Form {
     setupValidator(Vue) {
         // create a Vue instance for Vuelidate to live in
         if (this._config.validations !== null) {
-            let validations    = this._config.validations;
+            let validations   = this._config.validations;
+            this._validations = {}
+
             this._hasValidator = true
             this._validator    = new Vue({
                 mixins: [validationMixin],
@@ -121,6 +123,31 @@ export default class Form {
             Object.defineProperty(this, '$v', {
                 get: () => this._validator.$v
             })
+
+            this.parseValidations(typeof validations === 'function' ? validations(this._validator) : validations)
+        }
+    }
+
+    // use a level count to construct an array of possible validations
+    parseValidations(validations, previousMap = null) {
+        for (let field in validations) {
+            if (validations.hasOwnProperty(field) && typeof validations[field] === 'object') {
+                for (let possibleRule in validations[field]) {
+                    if (validations[field].hasOwnProperty(possibleRule)) {
+                        if (typeof validations[field][possibleRule] === 'function') {
+                            let fieldMap = (previousMap !== null ? previousMap + '.' : '') + field
+
+                            if (this._validations.hasOwnProperty(fieldMap)) {
+                                this._validations[fieldMap].push(possibleRule)
+                            } else {
+                                this._validations[fieldMap] = [possibleRule]
+                            }
+                        } else {
+                            this.parseValidations(validations[field][possibleRule], (previousMap !== null ? previousMap + '.' : '') + field + '.' + possibleRule)
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -147,10 +174,11 @@ export default class Form {
     reset() {
         for (let field in this._data._original) {
             if (this._data.hasOwnProperty(field)) {
-                this._data[field] = null
-            }
-            if (this._validator.hasOwnProperty(field)) {
-                this._validator._data[field] = null
+                if (typeof this._data[field] === 'object') {
+                    this.resetNestedData(this._data[field])
+                } else {
+                    this._data[field] = null
+                }
             }
         }
 
@@ -161,6 +189,18 @@ export default class Form {
         }
 
         this.onReset()
+    }
+
+    resetNestedData(dataObject) {
+        for (let field in dataObject) {
+            if (dataObject.hasOwnProperty(field)) {
+                if (typeof dataObject[field] === 'object') {
+                    this.resetNestedData(dataObject[field])
+                } else {
+                    dataObject[field] = null
+                }
+            }
+        }
     }
 
     // Submits the form using the submitter you specified in the config
@@ -196,55 +236,45 @@ export default class Form {
     listen(event) {
         if (typeof event !== 'object') return
 
-        let field = (event.target.indexOf('.') !== -1)
-            ? event.target.split('.').reduce((o, i) => o[i], this.$v)
-            : this.$v[event.target];
+        let field = (this.hasValidator(event.field))
+            ? event.field.indexOf('.') !== -1
+                        ? event.field.split('.').reduce((o, i) => o[i], this.$v)
+                        : this.$v[event.field]
+            : false
 
         switch (event.type) {
             case 'input':
-                if (this.hasValidator(event.target)) field.$touch()
-                clearTimeout(this._timers.inputDebounce)
-                this._timers.inputDebounce = setTimeout(() => {
-                    if (this.hasValidator(event.target) && this._config.validateOnInput) this.validate(event.target)
-                }, this._config.inputDebounce)
-                this.onInput(event.target, event.payload)
+                if (this.hasValidator(event.field)) {
+                    field.$touch()
+                    if (this._config.validateOnInput) {
+                        clearTimeout(this._timers.inputDebounce)
+                        this._timers.inputDebounce = setTimeout(() => this.validate(event.field), this._config.inputDebounce)
+                    }
+                }
+                this.onInput(event.field, event.payload)
                 break;
             case 'blur':
-                if (this.hasValidator(event.target)) {
+                if (this.hasValidator(event.field)) {
                     if (this._config.touchOnBlur) field.$touch()
-                    if (this._config.validateOnBlur) this.validate(event.target)
+                    if (this._config.validateOnBlur) this.validate(event.field)
                 }
-                this.onBlur(event.target, event.payload)
+                this.onBlur(event.field, event.payload)
                 break;
             case 'focus':
-                if (this.hasValidator(event.target)) {
+                if (this.hasValidator(event.field)) {
                     if (this._config.touchOnFocus) field.$touch()
-                    if (this._config.validateOnFocus) this.validate(event.target)
+                    if (this._config.validateOnFocus) this.validate(event.field)
                 }
-                this.onFocus(event.target, event.payload)
+                this.onFocus(event.field, event.payload)
                 break;
         }
     }
 
     // checks if the form is under any validation, optionally check if a specific field is under validation
     hasValidator(field = null) {
-        if (this._hasValidator && field !== null && field.indexOf('.') !== -1) {
-            return typeof (field.split('.').reduce((o, i) => o[i], this.$v)) !== 'undefined';
-        }
         return field !== null
-            ? this._hasValidator && this.$v.hasOwnProperty(field)
+            ? this._hasValidator && this._validations.hasOwnProperty(field)
             : this._hasValidator
-    }
-
-    // use a level count to construct an array of possible validations
-    readValidations(originalValidations) {
-        console.log(Object.getOwnPropertyNames(originalValidations));
-        for (let prop in originalValidations) {
-            if (originalValidations.hasOwnProperty(prop)
-                && typeof originalValidations[prop] === 'object') {
-                this.readValidations(originalValidations[prop])
-            }
-        }
     }
 
     // Reads the validation errors and translates them into validation messages
@@ -256,59 +286,35 @@ export default class Form {
         // clear all validation messages before validation
         this.errors.clear(targetField)
 
-        // read all of the original validation rules from the validator
-        let originalValidations = typeof this._validator.$options.validations === 'function'
-            ? this._validator.$options.validations(this._validator)
-            : this._validator.$options.validations
-
-        console.log(Object.entries(originalValidations));
-
-        for (let valid in originalValidations) {
-            if (originalValidations.hasOwnProperty(valid)) {
-                this.readValidations(originalValidations)
-            }
-        }
-
-        // use all of the original validations unless a target field is specified
-
-        let validations = {};
-        if (targetField !== null && targetField.indexOf('.') !== -1) {
-            validations = {[targetField]: targetField.split('.').reduce((o, i) => o[i], originalValidations)}
-        } else if (targetField !== null) {
-            validations = {[targetField]: originalValidations[targetField]}
-        } else {
-            validations = originalValidations
-        }
-
-        // TODO: nested validations!!!
+        let validations = targetField !== null
+            ? {[targetField]: targetField}
+            : this._validations
 
         let errors = {}
         for (let field in validations) {
-            // only continue if the validator reports that the field has an error
-            let fieldRef = field.indexOf('.') !== -1
+            let validation = field.indexOf('.') !== -1
                 ? field.split('.').reduce((o, i) => o[i], this.$v)
                 : this.$v[field]
-            if (fieldRef && fieldRef.$error === true) {
-                // get the rules for this field
-                let rules = validations[field]
-                console.log(rules)
+
+            // only continue if the validator reports that the field has an error
+            if (typeof validation === 'object' && validation.$error === true) {
 
                 // loop through each rule and translate any errors into messages
                 let messages = []
-                for (let rule in rules) {
+                for (let rule in validation.$params) {
                     // only continue if the validator reports a false value for this rule
-                    if (rules.hasOwnProperty(rule) && fieldRef[rule] === false) {
+                    if (validation.hasOwnProperty(rule) && validation[rule] === false) {
 
                         // get the override message for the [field][rule] pair if it exists, or use the default
                         // message for the rule. If a message can't be resolved, use a generic default instead.
                         let message = (this._config.overrideMessages[field] && this._config.overrideMessages[field][rule])
                             ? this._config.overrideMessages[field][rule]
                             : (this._config.defaultMessages[rule])
-                                ? this._config.defaultMessages[rule]
-                                : 'The :attribute field has an error';
+                                          ? this._config.defaultMessages[rule]
+                                          : 'The :attribute field has an error';
 
                         // get any params for the rule, if available
-                        let params = fieldRef.$params[rule];
+                        let params = Object.assign({}, validation.$params[rule]);
                         // remove the type attribute from the params list
                         if (params !== null && params.type) delete params.type
 
@@ -342,7 +348,7 @@ export default class Form {
         return errors
     }
 
-    onInput(target, value) {
+    onInput(target, event) {
         // do something with event - {target:{id: ID, value: VALUE}}
     }
 

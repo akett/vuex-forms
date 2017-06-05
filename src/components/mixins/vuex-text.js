@@ -2,7 +2,7 @@ import merge from "merge"
 import VuexField from "./vuex-field"
 import Masker from "../../helpers/Masker"
 
-export default () => merge.recursive(VuexField, {
+export default () => merge.recursive(true, VuexField, {
     props: {
         type: {
             type: String,
@@ -26,7 +26,7 @@ export default () => merge.recursive(VuexField, {
             this.activeKeyCode = e.keyCode || e.charCode
             if (!this.hasMask()) {
                 if (this.activeKeyCode === 8 && this.activeKeyCode === 46) {
-                    this.handleInput(this.$refs.input.value)
+                    this.handleInput(e)
                 }
                 return;
             }
@@ -50,24 +50,26 @@ export default () => merge.recursive(VuexField, {
             return value;
         },
 
-        inputEvent(value) {
+        inputEvent(event) {
+            let value = event.target.value;
             if (!this.hasMask()) {
                 this.tempValue = value
-                this.emitEvent('input', value)
+                this.emitEvent('input', event)
                 return;
             }
 
             // a mask was specified, if not deleting, apply the mask and update the input's value
             if (this.activeKeyCode !== 8 && this.activeKeyCode !== 46) {
-                this.$refs.input.value = this.tempValue = value = Masker.applyMask(Masker.removeMask(value, this.mask), this.mask)
+                this.tempValue = value = Masker.applyMask(Masker.removeMask(value, this.mask), this.mask)
                 Masker.updateCaretPosition(this.$refs.input, this.activeKeyCode)
+            } else {
+                this.tempValue = value
             }
 
             // apply the save mask
-            value = this.applySaveMask(value)
+            event.target.value = this.applySaveMask(value)
 
-            // emit the formatted value up the chain
-            this.emitEvent('input', value)
+            this.emitEvent('input', event)
         },
 
         blurEvent(event) {
