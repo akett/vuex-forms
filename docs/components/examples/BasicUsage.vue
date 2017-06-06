@@ -9,9 +9,7 @@
                                    id="bu_name"
                                    name="name"
                                    v-model="form.name"
-                                   :errors="form.errors.get('name')"
-                                   @event="form.listen($event)"
-                                   v-vuex-input="form.name"
+                                   v-vuex-input:form:name="form"
                         ></vuex-text>
 
                         <vuex-text type="email"

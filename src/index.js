@@ -13,10 +13,23 @@ const VuexForms = {
         Vue.component('vuex-radio', VuexRadio)
         Vue.component('vuex-select', VuexSelect)
         Vue.directive('vuex-input', {
-            bind: (el, binding, value) => {
-                console.log(el)
+            bind: function (el, binding, value) {
                 console.log(binding)
-                console.log(value)
+                let field = binding.arg
+                let form  = value.context[binding.expression.split('.')[0]];
+                value.child.$on('event', (event) => {
+                    form.listen(event)
+                })
+                value.child.errors = form.errors.get(field)
+            },
+            update: function (el, binding, value) {
+                // mutating prop error -_-
+                let field          = binding.expression.split('.').reverse().splice(0, 1).join('.')
+                let form           = value.context[binding.expression.split('.')[0]];
+                value.child.errors = form.errors.get(field)
+            },
+            unbind(el, binding, value) {
+                value.child.$off('event')
             }
         })
     }
