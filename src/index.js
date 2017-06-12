@@ -15,35 +15,30 @@ const VuexForms = {
 
         Vue.directive('vuex-input', {
             bind: function (el, binding, value) {
+                let form  = binding.value
                 let field = binding.arg
                 if (binding.modifiers) {
                     for (let modifier in binding.modifiers) {
                         field += '.' + modifier
                     }
                 }
-                let form              = binding.value
-                value.child.tempValue = form[field]
-                value.child.$on('event', (event) => {
-                    form.listen(event)
-                })
-                value.child.$on('input', (value) => {
+                value.child.tempValue   = form[field]
+                value.child.localErrors = form.errors.get(field)
+                value.child.$on('input', (inputValue) => {
                     if (field.indexOf('.') !== -1) {
                         //field.split('.').reduce((o, i) => o[i], form)
                         console.log('still working on nested data for the directive')
                     } else {
-                        form[field] = value
+                        value.child.$set(form, field, inputValue)
                     }
                 })
-                value.child.localErrors = form.errors.get(field)
-            },
-            update: function (el, binding, value) {
-                let field = binding.arg
-                if (binding.modifiers) {
-                    for (let modifier in binding.modifiers) {
-                        field += '.' + modifier
-                    }
-                }
-                value.child.localErrors = binding.value.errors.get(field)
+                value.child.$on('event', (event) => {
+                    form.listen(event)
+                    // input event validation has a debounce timer, use setTimeout to wait for the validation to happen
+                    setTimeout(() => {
+                        value.child.localErrors = form.errors.get(field)
+                    }, event.type === 'input' ? form._config.inputDebounce + 5 : 0)
+                })
             },
             unbind(el, binding, value) {
                 value.child.$off('event')

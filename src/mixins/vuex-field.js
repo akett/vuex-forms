@@ -11,6 +11,7 @@ export default {
     },
     data () {
         return {
+            masker: false,
             tempValue: null,
             activeKeyCode: 0,
             localErrors: null,

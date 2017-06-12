@@ -78,7 +78,7 @@
                         <h2>Basic Usage</h2>
                         <p>
                             You can import the library and <kbd>use</kbd>
-                            it as a Vue plugin to install all the form components globally.
+                            it as a Vue plugin to install the <kbd>v-vuex-input</kbd> directive and all the form components globally.
                         </p>
                         <pre v-highlightjs>
 <code class="javascript">import Vue from "vue"
@@ -94,7 +94,7 @@ Vue.use(VuexForms)
 <code class="javascript">import { Form } from "vuex-forms"
 import VuexText from "vuex-forms/src/components/VuexText.vue"
 
-var Component = Vue.extend({
+var MyComponent = Vue.extend({
     components: {
         'vuex-text': VuexText
     },

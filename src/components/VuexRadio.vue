@@ -18,7 +18,7 @@
 </template>
 
 <script>
-    import VuexRadioMixin from "./mixins/vuex-radio"
+    import VuexRadioMixin from "../mixins/vuex-radio"
     export default {
         name: 'VuexRadio',
         mixins: [VuexRadioMixin()]

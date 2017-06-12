@@ -36,7 +36,7 @@
 </template>
 
 <script>
-    import VuexTextMixin from "./mixins/vuex-text"
+    import VuexTextMixin from "../mixins/vuex-text"
     export default {
         name: 'VuexText',
         mixins: [VuexTextMixin()]

@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import VuexCheckboxMixin from "./mixins/vuex-checkbox"
+    import VuexCheckboxMixin from "../mixins/vuex-checkbox"
     export default {
         name: 'VuexCheckbox',
         mixins: [VuexCheckboxMixin()]

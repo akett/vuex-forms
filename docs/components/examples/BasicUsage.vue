@@ -5,7 +5,7 @@
                 <div class="column is-6">
                     <form name="example-form" @submit.prevent="submitForm">
 
-                        <vuex-text label="Name (directive)"
+                        <vuex-text label="Name"
                                    id="bu_name"
                                    name="name"
                                    v-vuex-input:name="form"
@@ -15,9 +15,7 @@
                                    label="Email"
                                    id="bu_email"
                                    name="email"
-                                   v-model="form.email"
-                                   :errors="form.errors.get('email')"
-                                   @event="form.listen($event)"
+                                   v-vuex-input:email="form"
                         ></vuex-text>
 
                         <vuex-text type="tel"
@@ -25,9 +23,7 @@
                                    label="Phone"
                                    id="bu_phone"
                                    name="phone"
-                                   v-model="form.phone"
-                                   :errors="form.errors.get('phone')"
-                                   @event="form.listen($event)"
+                                   v-vuex-input:phone="form"
                         ></vuex-text>
 
                         <vuex-text label="Zip Code"
@@ -35,9 +31,7 @@
                                    :save-mask="true"
                                    id="bu_zip"
                                    name="zip"
-                                   v-model="form.zip"
-                                   :errors="form.errors.get('zip')"
-                                   @event="form.listen($event)"
+                                   v-vuex-input:zip="form"
                         ></vuex-text>
 
                         <div class="has-text-centered">
@@ -148,7 +142,7 @@ export default {
         data () {
             return {
                 form: new Form(this, {
-                    name: 'Name test',
+                    name: null,
                     email: null,
                     phone: null,
                     zip: null,

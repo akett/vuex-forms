@@ -1,21 +1,29 @@
 import caretPosition from "./caretPosition";
 
-const Masker = {
+class Masker {
     // control the input's caret position to prevent the caret
     // from being moved to the end of the input when masking
-    caretPosition: 0,
-    readCaretPosition: (el) => {
-        Masker.caretPosition = caretPosition.get(el);
-    },
-    updateCaretPosition: (el, keyCode) => {
+    constructor() {
+        this.caretPosition = 0;
+    }
+
+    readCaretPosition(el) {
+        this.caretPosition = caretPosition.get(el);
+    }
+
+    updateCaretPosition(el, keyCode) {
         let movementOffset = (keyCode !== 8 && keyCode !== 46)
             ? 1
             : (keyCode !== 8) ? 0 : -1;
-        caretPosition.set(el, Masker.caretPosition + movementOffset);
-    },
-    applyMask: function (data, mask) {
+        console.log(movementOffset)
+        setTimeout(() => {
+            caretPosition.set(el, this.caretPosition + movementOffset);
+        }, 0)
+    }
+
+    applyMask(data, mask) {
         // remove the mask so we're only working with data characters
-        data = Masker.removeMask(data, mask);
+        data = this.removeMask(data, mask);
 
         let text = '', i, x, currentMaskChar, currentDataChar;
         for (x = i = 0; x < data.length && i < mask.length; i++) {
@@ -46,14 +54,15 @@ const Masker = {
                     break;
                 default:
                     text += currentMaskChar;
-                    if (Masker.caretPosition === i) Masker.caretPosition++;
+                    if (this.caretPosition === i) this.caretPosition++;
                     break;
             }
         }
 
         return text;
-    },
-    removeMask: function (data, mask) {
+    }
+
+    removeMask(data, mask) {
         let text = '', currentMaskChar, currentDataChar;
         for (let i = 0; i < mask.length; i++) {
             currentMaskChar = mask.charAt(i);
@@ -87,6 +96,6 @@ const Masker = {
 
         return text;
     }
-};
+}
 
 export default Masker;

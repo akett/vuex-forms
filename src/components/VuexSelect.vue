@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import VuexSelectMixin from "./mixins/vuex-select"
+    import VuexSelectMixin from "../mixins/vuex-select"
     export default {
         name: 'VuexSelect',
         mixins: [VuexSelectMixin()]
