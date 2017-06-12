@@ -16,9 +16,10 @@
 
                     <a href="#examples" class="nav-title">Examples</a>
                     <ul class="nav-list">
-                        <li><a href="#basic-example">Basic Example</a></li>
+                        <li><a href="#basic-form">Basic Form</a></li>
                         <li><a href="#basic-validation-example">Basic Validation</a></li>
                         <li><a href="#dynamic-validation-example">Dynamic Validation</a></li>
+                        <li><a href="#advanced-validation-example">Advanced Validation</a></li>
                         <li><a href="#nested-example">Nested Data</a></li>
                     </ul>
 
@@ -139,15 +140,18 @@ var MyComponent = Vue.extend({
                 <section class="doc-section">
 
                     <div class="doc-example">
-                        <a class="anchor" name="basic-example"></a>
-                        <h2>Basic Example</h2>
-                        <basic-usage></basic-usage>
+                        <a class="anchor" name="basic-form"></a>
+                        <basic-form></basic-form>
                     </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="basic-validation-example"></a>
-                        <h2>Basic Validation</h2>
                         <basic-validation></basic-validation>
+                    </div>
+
+                    <div class="doc-example">
+                        <a class="anchor" name="advanced-validation-example"></a>
+                        <advanced-validation></advanced-validation>
                     </div>
 
                     <div class="doc-example">

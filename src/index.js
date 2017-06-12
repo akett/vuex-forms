@@ -15,28 +15,29 @@ const VuexForms = {
 
         Vue.directive('vuex-input', {
             bind: function (el, binding, value) {
-                let form  = binding.value
-                let field = binding.arg
+                let form      = binding.value
+                let field     = binding.arg
+                let component = value.child
                 if (binding.modifiers) {
                     for (let modifier in binding.modifiers) {
                         field += '.' + modifier
                     }
                 }
-                value.child.tempValue   = form[field]
-                value.child.localErrors = form.errors.get(field)
-                value.child.$on('input', (inputValue) => {
+                component.tempValue   = form[field]
+                component.localErrors = form.errors.get(field)
+                component.$on('input', (inputValue) => {
                     if (field.indexOf('.') !== -1) {
                         //field.split('.').reduce((o, i) => o[i], form)
                         console.log('still working on nested data for the directive')
                     } else {
-                        value.child.$set(form, field, inputValue)
+                        component.$set(form, field, inputValue)
                     }
                 })
-                value.child.$on('event', (event) => {
+                component.$on('event', (event) => {
                     form.listen(event)
                     // input event validation has a debounce timer, use setTimeout to wait for the validation to happen
                     setTimeout(() => {
-                        value.child.localErrors = form.errors.get(field)
+                        component.localErrors = form.errors.get(field)
                     }, event.type === 'input' ? form._config.inputDebounce + 5 : 0)
                 })
             },

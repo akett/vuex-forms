@@ -1,9 +1,15 @@
 <template>
     <div>
+        <h2>Basic Form</h2>
+        <p>
+            No validation, no Vuex, just a simple form with manually defined fields, input masking,
+            and the default form components using the <kbd>v-vuex-input</kbd> directive to handle
+            passing form events and syncing the data.
+        </p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
                 <div class="column is-6">
-                    <form name="example-form" @submit.prevent="submitForm">
+                    <form name="example-form" @submit.prevent="form.submit()">
 
                         <vuex-text label="Name"
                                    id="bu_name"
@@ -50,23 +56,19 @@
                 </div>
             </div>
             <div slot="html">
-                <pre class="code" v-highlightjs><code class="html no-lang">&lt;form name="example-form" @submit.prevent="form.submit()"&gt;
+                <pre class="code" v-highlightjs><code class="html no-lang">&lt;form name="basic-form" @submit.prevent="form.submit()"&gt;
 
     &lt;vuex-text label="Name"
                id="name"
                name="name"
-               v-model="form.name"
-               :errors="form.errors.get('name')"
-               @event="form.listen($event)"
+               v-vuex-input:name="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text type="email"
                label="Email"
                id="email"
                name="email"
-               v-model="form.email"
-               :errors="form.errors.get('email')"
-               @event="form.listen($event)"
+               v-vuex-input:email="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text type="tel"
@@ -74,9 +76,7 @@
                label="Phone"
                id="phone"
                name="phone"
-               v-model="form.phone"
-               :errors="form.errors.get('phone')"
-               @event="form.listen($event)"
+               v-vuex-input:phone="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text label="Zip Code"
@@ -84,9 +84,7 @@
                :save-mask="true"
                id="zip"
                name="zip"
-               v-model="form.zip"
-               :errors="form.errors.get('zip')"
-               @event="form.listen($event)"
+               v-vuex-input:zip="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;div class="has-text-centered"&gt;
@@ -97,13 +95,6 @@
             </div>
             <div slot="javascript">
                 <pre class="code" v-highlightjs><code class="javascript no-lang">import { Form } from "vuex-forms"
-import {
-  email,
-  maxLength,
-  minLength,
-  required,
-} from "vuex-forms/src/validators"
-import states from "../store/static/us-states";
 
 export default {
     data () {
@@ -113,13 +104,6 @@ export default {
                 email: null,
                 phone: null,
                 zip: null,
-            }, {
-                validations: {
-                    name: { required, minLength: minLength(2) },
-                    email: { required, email },
-                    phone: { required, minLength: minLength(10), maxLength: maxLength(10) },
-                    zip: { required, minLength: minLength(5), maxLength: maxLength(10) },
-                }
             }),
         }
     }
@@ -131,12 +115,6 @@ export default {
 
 <script>
     import {Form} from "../../../src"
-    import {
-        email,
-        maxLength,
-        minLength,
-        required,
-    } from "../../../src/validators"
     export default {
         name: 'BasicUsage',
         data () {
@@ -146,13 +124,6 @@ export default {
                     email: null,
                     phone: null,
                     zip: null,
-                }, {
-                    validations: {
-                        name: {required, minLength: minLength(2)},
-                        email: {required, email},
-                        phone: {required, minLength: minLength(10), maxLength: maxLength(10)},
-                        zip: {required, minLength: minLength(5), maxLength: maxLength(10)},
-                    }
                 }),
             }
         },
