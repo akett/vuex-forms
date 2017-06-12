@@ -63,7 +63,7 @@ export default () => merge.recursive(true, VuexField, {
                 value = this.applyMask(value)
 
                 // apply the save mask for the final value
-                event.target.value = this.applySaveMask(event.target.value)
+                event.target.value = this.applySaveMask(value)
             }
 
             this.tempValue = value
