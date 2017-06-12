@@ -11,8 +11,8 @@
                    class="form-control">
             {{ option[option_name] }}
         </label>
-        <ul class="form-errors" v-if="errors">
-            <li v-for="error in errors">{{ error }}</li>
+        <ul class="form-errors" v-if="fieldErrors">
+            <li v-for="error in fieldErrors">{{ error }}</li>
         </ul>
     </div>
 </template>

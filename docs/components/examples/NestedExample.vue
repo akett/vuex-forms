@@ -12,9 +12,7 @@
 
                 <vuex-text label="Nested Name"
                            name="nested.data.is.nested.name"
-                           v-model="form.nested.data.is.nested.name"
-                           :errors="form.errors.get('nested.data.is.nested.name')"
-                           @event="form.listen($event)"
+                           v-vuex-input:nested.data.is.nested.name="form"
                 ></vuex-text>
 
                 <vuex-text label="Nested City"

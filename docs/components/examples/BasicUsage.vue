@@ -5,11 +5,10 @@
                 <div class="column is-6">
                     <form name="example-form" @submit.prevent="submitForm">
 
-                        <vuex-text label="Name"
+                        <vuex-text label="Name (directive)"
                                    id="bu_name"
                                    name="name"
-                                   v-model="form.name"
-                                   v-vuex-input:form:name="form"
+                                   v-vuex-input:name="form"
                         ></vuex-text>
 
                         <vuex-text type="email"
@@ -149,7 +148,7 @@ export default {
         data () {
             return {
                 form: new Form(this, {
-                    name: null,
+                    name: 'Name test',
                     email: null,
                     phone: null,
                     zip: null,

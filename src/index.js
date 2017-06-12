@@ -12,24 +12,42 @@ const VuexForms = {
         Vue.component('vuex-checkbox', VuexCheckbox)
         Vue.component('vuex-radio', VuexRadio)
         Vue.component('vuex-select', VuexSelect)
+
         Vue.directive('vuex-input', {
             bind: function (el, binding, value) {
-                console.log(binding)
                 let field = binding.arg
-                let form  = value.context[binding.expression.split('.')[0]];
+                if (binding.modifiers) {
+                    for (let modifier in binding.modifiers) {
+                        field += '.' + modifier
+                    }
+                }
+                let form              = binding.value
+                value.child.tempValue = form[field]
                 value.child.$on('event', (event) => {
                     form.listen(event)
                 })
-                value.child.errors = form.errors.get(field)
+                value.child.$on('input', (value) => {
+                    if (field.indexOf('.') !== -1) {
+                        //field.split('.').reduce((o, i) => o[i], form)
+                        console.log('still working on nested data for the directive')
+                    } else {
+                        form[field] = value
+                    }
+                })
+                value.child.localErrors = form.errors.get(field)
             },
             update: function (el, binding, value) {
-                // mutating prop error -_-
-                let field          = binding.expression.split('.').reverse().splice(0, 1).join('.')
-                let form           = value.context[binding.expression.split('.')[0]];
-                value.child.errors = form.errors.get(field)
+                let field = binding.arg
+                if (binding.modifiers) {
+                    for (let modifier in binding.modifiers) {
+                        field += '.' + modifier
+                    }
+                }
+                value.child.localErrors = binding.value.errors.get(field)
             },
             unbind(el, binding, value) {
                 value.child.$off('event')
+                value.child.$off('input')
             }
         })
     }

@@ -13,6 +13,12 @@ export default {
         return {
             tempValue: null,
             activeKeyCode: 0,
+            localErrors: null,
+        }
+    },
+    computed: {
+        fieldErrors() {
+            return this.errors || this.localErrors
         }
     },
     methods: {

@@ -14,8 +14,8 @@
                 class="form-control">
             <option v-for="option in options" :value="option[option_value]" v-text="option[option_name]"></option>
         </select>
-        <ul class="form-errors" v-if="errors">
-            <li v-for="error in errors">{{ error }}</li>
+        <ul class="form-errors" v-if="fieldErrors">
+            <li v-for="error in fieldErrors">{{ error }}</li>
         </ul>
     </div>
 </template>
