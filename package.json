@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "Comprehensive form management for Vue.js, built with Vuex in mind.",
   "author": "Andy Crockett",
-  "private": true,
   "main": "src/index.js",
   "scripts": {
     "dev": "node build/dev-server.js",
