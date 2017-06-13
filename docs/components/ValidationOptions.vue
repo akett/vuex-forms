@@ -39,7 +39,7 @@
                     <div class="form-group">
                         <label for="inputDebounce">Input Validation Debounce</label>
                         <input type="number" id="inputDebounce" step="10" max="5000" min="0"
-                               v-model="form._config.inputDebounce" class="form-control inline-control"> ms
+                               v-model.number="form._config.inputDebounce" class="form-control inline-control"> ms
                     </div>
                 </div>
 

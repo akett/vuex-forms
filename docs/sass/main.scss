@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
+
 $font-family: 'Roboto', Helvetica, Arial, sans-serif;
 $vue-bg: #4fc08d;
 $vue-light: #42b983;
@@ -6,8 +7,11 @@ $vue-dark: #2c3e50;
 $saturated-vue-light: lighten(saturate($vue-light, 50), 35);
 $saturated-vue-dark: lighten(saturate($vue-dark, 25), 45);
 
-$code-bg-color: #f5f5f5;
-$code-font-color: #222;
+$font-color: #eee;
+$background-color: #2c3e50;
+
+$code-bg-color: darken($background-color, 5);
+$code-font-color: #eee;
 $code-font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 
 @import "modules/core";
@@ -15,6 +19,7 @@ $code-font-family: Consolas, Monaco, Andale Mono, Ubuntu Mono, monospace;
 @import "modules/header";
 @import "modules/docs";
 @import "modules/forms";
+@import "modules/table";
 @import "modules/api-report";
 @import "modules/code-color";
 @import "modules/code-example";

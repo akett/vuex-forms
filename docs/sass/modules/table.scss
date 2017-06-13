@@ -1,0 +1,22 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    th {
+        text-align: left;
+        border-bottom: 1px solid $background-color;
+        font-weight: 100;
+        font-size: 1.25rem;
+        background: lighten($background-color, 5);
+    }
+    th, td {
+        padding: 0.5rem;
+    }
+    tr {
+        &:hover {
+            td {
+                background-color: lighten($background-color, 5);
+            }
+        }
+    }
+}

@@ -12,8 +12,8 @@ body {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #fff;
-    color: #2c3e50;
+    background: $background-color;
+    color: $font-color;
     overflow-y: auto;
     overflow-x: hidden;
     padding-bottom: 60px;
@@ -42,15 +42,15 @@ a {
     text-decoration: none;
     &:hover {
         cursor: pointer;
-        color: adjust_hue($vue-light, 180);
+        color: #fff;
     }
 }
 
 fieldset {
     margin: 1rem 0;
-    border: 1px solid #ccc;
+    border: 1px solid lighten($vue-dark, 10);
     border-radius: 0.25rem;
-    background: #FAFAFA;
+    background: $background-color;
     padding: 1rem 1rem 0.25rem;
     legend {
         font-variant: all-small-caps;

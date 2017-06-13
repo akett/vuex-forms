@@ -23,6 +23,17 @@ $header-link-color: adjust_hue($vue-light, 90);
         left: 0;
         right: 0;
         bottom: 0;
+        background: #fff;
+    }
+    &:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         background: linear-gradient(to right bottom, $saturated-vue-light 0%, $saturated-vue-dark 100%);
         animation: fade 10s ease infinite;
         will-change: opacity;

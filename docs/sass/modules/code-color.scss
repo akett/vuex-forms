@@ -1,14 +1,14 @@
-/* Base16 Atelier Cave Light - Theme */
-/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/cave) */
+/* Base16 Atelier Savanna Dark - Theme */
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/savanna) */
 /* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
 
-/* Atelier-Cave Comment */
+/* Atelier-Savanna Comment */
 .hljs-comment,
 .hljs-quote {
-    color: #655f6d;
+    color: #78877d;
 }
 
-/* Atelier-Cave Red */
+/* Atelier-Savanna Red */
 .hljs-variable,
 .hljs-template-variable,
 .hljs-attribute,
@@ -17,13 +17,12 @@
 .hljs-regexp,
 .hljs-link,
 .hljs-name,
-.hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-    color: #be4678;
+    color: #ff6e7a;
 }
 
-/* Atelier-Cave Orange */
+/* Atelier-Savanna Orange */
 .hljs-number,
 .hljs-meta,
 .hljs-built_in,
@@ -31,41 +30,41 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-    color: #dd4a68;
+    color: #89DDFF;
 }
 
-/* Atelier-Cave Green */
+/* Atelier-Savanna Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-    color: #690;
+    color: #C3E88D;
 }
 
-/* Atelier-Cave Blue */
+/* Atelier-Savanna Blue */
 .hljs-title,
 .hljs-section {
-    color: #576ddb;
+    color: #478c90;
 }
 
-/* Atelier-Cave Purple */
+/* Atelier-Savanna Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-    color: #07a;
+    color: #C792EA;
 }
 
 .hljs-deletion,
 .hljs-addition {
-    color: #19171c;
+    color: #171c19;
     display: inline-block;
     width: 100%;
 }
 
 .hljs-deletion {
-    background-color: #be4678;
+    background-color: #b16139;
 }
 
 .hljs-addition {
-    background-color: #2a9292;
+    background-color: #489963;
 }
 
 .hljs {
@@ -90,8 +89,8 @@
             left: 0;
             right: 0;
             padding: 0.25rem 0.5rem;
-            border-bottom: 1px solid #eee;
-            color: #999;
+            border-bottom: 1px solid $vue-dark;
+            color: lighten($vue-dark, 15);
             font-family: $font-family;
             font-size: 0.75rem;
         }

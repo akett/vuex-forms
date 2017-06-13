@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Advanced Example</h2>
+        <h2>Complete Form</h2>
         <p></p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
@@ -152,7 +152,7 @@
     import {Form} from "../../../src"
     import states from "../../store/static/us-states";
     export default {
-        name: 'BasicValidation',
+        name: 'CompleteForm',
         data () {
             return {
                 form: new Form(this, this.$store.state.formTest, {

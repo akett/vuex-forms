@@ -10,12 +10,14 @@
 
 @mixin form-control-style {
     padding: 0.25rem 0.5rem;
-    border: 1px solid #ccc;
+    color: #fff;
+    background: $vue-dark;
+    border: 1px solid lighten($vue-dark, 10);
     border-radius: 0.25rem;
     width: 100%;
     outline: none;
     &:focus {
-        box-shadow: 0 0 1rem -0.25rem #42b983;
+        box-shadow: 0 0 1rem -0.25rem $vue-light;
     }
     &.inline-control {
         width: auto;
@@ -27,6 +29,9 @@
     font-size: inherit;
     &[type='text'], &[type='email'], &[type='password'], &[type='tel'], &[type='number'] {
         @include form-control-style;
+        &::placeholder {
+            color: #aaa;
+        }
     }
     &[type='radio'], &[type='checkbox'] {
         outline-color: #42b983
@@ -38,7 +43,7 @@ textarea.form-control, select.form-control {
 }
 
 .form-errors {
-    color: #c8302b;
+    color: #FF5370;
     margin: 0.5rem 0 0;
     padding: 0;
     li {
@@ -48,16 +53,26 @@ textarea.form-control, select.form-control {
 }
 
 .button {
+    font-family: inherit;
     padding: 0.25rem 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid lighten($vue-dark, 15);
     border-radius: 0.25rem;
-    background: #eee;
+    background: lighten($vue-dark, 10);
     outline: none;
+    color: #fff;
+    &[type='submit'] {
+        background-color: darken($vue-light, 5);
+        border-color: darken($vue-light, 5);
+        &:hover {
+            background-color: lighten($vue-light, 5);
+            border-color: lighten($vue-light, 5);
+        }
+    }
     &:hover {
         cursor: pointer;
-        background: #ddd;
+        background: lighten($vue-dark, 20);
     }
     &:focus {
-        border-color: #42b983;
+        border-color: lighten($vue-dark, 30);
     }
 }

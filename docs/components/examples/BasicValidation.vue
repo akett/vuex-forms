@@ -132,6 +132,7 @@ export default {
         minLength,
         maxLength,
     } from "../../../src/validators"
+
     export default {
         name: 'BasicValidation',
         data () {

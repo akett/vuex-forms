@@ -20,7 +20,7 @@ import ValidationOptions from "./components/ValidationOptions.vue";
 import BasicForm from "./components/examples/BasicForm.vue";
 import BasicValidation from "./components/examples/BasicValidation.vue";
 import DynamicValidation from "./components/examples/DynamicValidation.vue";
-import AdvancedValidation from "./components/examples/AdvancedValidation.vue";
+import CompleteForm from "./components/examples/CompleteForm.vue";
 import NestedExample from "./components/examples/NestedExample.vue";
 
 Vue.component('api-reporter', ApiReporter)
@@ -29,7 +29,7 @@ Vue.component('doc-example', DocExample)
 Vue.component('validation-options', ValidationOptions)
 Vue.component('basic-form', BasicForm)
 Vue.component('basic-validation', BasicValidation)
-Vue.component('advanced-validation', AdvancedValidation)
+Vue.component('complete-form', CompleteForm)
 Vue.component('dynamic-validation', DynamicValidation)
 Vue.component('nested-example', NestedExample)
 

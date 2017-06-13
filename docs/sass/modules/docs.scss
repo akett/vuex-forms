@@ -1,6 +1,14 @@
 .docs {
     width: 100%;
+    margin: 0 auto;
+    padding: 60px 0;
     font-size: 0;
+    max-width: 1400px;
+}
+
+.anchor {
+    position: absolute;
+    margin-top: -20px;
 }
 
 .navigation-pane {
@@ -16,12 +24,10 @@
     width: 250px;
     height: 100vh;
     overflow: auto;
-    border-right: 1px solid #ccc;
     padding: 1rem;
     font-size: 1rem;
     &.affixed {
         position: fixed;
-        left: 0;
         top: 0;
     }
 }
@@ -34,7 +40,7 @@
     margin: 1rem 0;
     padding: 0;
     a {
-        color: $vue-dark;
+        color: saturate(lighten($vue-dark, 60), 100);
         &:hover {
             color: $vue-light;
         }
@@ -42,6 +48,20 @@
     li {
         display: block;
         margin: 0.5rem 1rem;
+        height: 20px;
+        &.is-active {
+            position: relative;
+            &:before {
+                content: ' ';
+                display: block;
+                position: absolute;
+                left: -15px;
+                top: 4px;
+                border-left: 7px solid $vue-light;
+                border-top: 7px solid transparent;
+                border-bottom: 7px solid transparent;
+            }
+        }
     }
 }
 
@@ -52,14 +72,14 @@
     line-height: 1.5em;
     h1 {
         padding-bottom: 1rem;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid $vue-light;
         margin-bottom: 4rem;
+        font-weight: 100;
     }
     h2 {
         margin-bottom: 2rem;
-    }
-    h1, h2, h3 {
-        font-weight: 500;
+        font-weight: 300;
+        color: saturate(lighten($vue-dark, 60), 100)
     }
     @media (min-width: 768px) {
         display: inline-block;
@@ -70,9 +90,9 @@
 }
 
 .doc-section {
-    margin-bottom: 5rem;
+    margin-bottom: 8rem;
 }
 
 .doc-example {
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
 }

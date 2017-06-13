@@ -2,9 +2,9 @@ export default {
     props: {
         id: {type: String, default: null},
         name: {type: String, required: true},
-        value: {type: [Number, Boolean, String], default: ''},
+        value: {type: [Number, Boolean, String], default: null},
         label: {type: String, default: null},
-        placeholder: {type: String, default: ''},
+        placeholder: {type: String, default: null},
         required: {type: Boolean, default: false},
         disabled: {type: Boolean, default: false},
         errors: {type: [String, Object, Array], default: null},
