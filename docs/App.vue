@@ -15,9 +15,6 @@
                         <li :class="{'is-active': activeTrigger === 'installation' }">
                             <a href="#installation">Installation</a>
                         </li>
-                        <li :class="{'is-active': activeTrigger === 'activation' }">
-                            <a href="#activation">Activation</a>
-                        </li>
                         <li :class="{'is-active': activeTrigger === 'basic-usage' }">
                             <a href="#basic-usage">Basic Usage</a>
                         </li>
@@ -115,13 +112,8 @@
 <code class="shell no-lang">$ yarn install vuex-forms</code></pre>
                         <p>Or, use the browser-ready bundle</p>
                         <pre v-highlightjs><code class="html no-lang">&lt;script src="vuex-forms/dist/VuexForms.min.js"&gt;&lt;/script&gt;</code></pre>
-                    </div>
-
-                    <div class="doc-example">
-                        <a class="anchor" name="activation"></a>
-                        <h2>Activation</h2>
                         <p>
-                            Now that it's installed, import the library and <kbd>use</kbd>
+                            Now that you have the package, import the library and <kbd>use</kbd>
                             it as a Vue plugin. This will install the <kbd>v-vuex-input</kbd>
                             directive and the prebuilt form components
                             (
@@ -145,7 +137,7 @@ Vue.use(VuexForms)
                             If you'd rather not install it globally, you can import the <kbd>Form</kbd>
                             class and any necessary form components directly to where they will be used.
                         </p>
-                        <pre v-highlightjs><code class="javascript">import { Form } from "vuex-forms"
+                        <pre v-highlightjs><code class="javascript no-lang">import { Form } from "vuex-forms"
 import VuexText from "vuex-forms/src/components/VuexText.vue"
 
 var MyComponent = Vue.extend({
@@ -198,8 +190,7 @@ var MyComponent = Vue.extend({
                         <p>
                             To use it, you simply need to define a key on your components' <kbd>data()</kbd> object
                             which will receive an instance of <kbd>Form</kbd>.
-                            <br/>
-                            (below, the key is aptly named <kbd>form</kbd>, but it can be whatever you want it to be)
+                            Below, the key is aptly named <kbd>form</kbd>, but it can be whatever you want it to be
                         </p>
                         <pre v-highlightjs><code class="javascript">import { Form } from "vuex-forms"
 ...
