@@ -1,6 +1,14 @@
 <template>
     <div>
         <h2>Dynamic Validation</h2>
+        <p>
+            Vuelidate allows us to define dynamic validations, however, the scope of Vuelidate VM is contained within
+            the <kbd>Form</kbd> class, therefore we have to pass a function that returns an object to the <kbd>validations</kbd>
+            parameter. The function should accept one parameter, the Vuelidate VM, on which all of the data you defined will be
+            available for you to work with. Check the javascript tab to see how this works, and then check out
+            <a href="https://monterail.github.io/vuelidate/#sub-dynamic-validation-schema">Vuelidate's docs on dynamic validations</a>
+            to learn more.
+        </p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
                 <div class="column is-6">

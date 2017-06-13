@@ -1,7 +1,8 @@
+$nav-width: 220px;
 .docs {
     width: 100%;
     margin: 0 auto;
-    padding: 60px 0;
+    padding: 3rem 0;
     font-size: 0;
     max-width: 1400px;
 }
@@ -14,14 +15,14 @@
 .navigation-pane {
     display: none;
     vertical-align: top;
-    width: 250px;
+    width: $nav-width;
     @media (min-width: 768px) {
         display: inline-block;
     }
 }
 
 .navigation-affix {
-    width: 250px;
+    width: $nav-width;
     height: 100vh;
     overflow: auto;
     padding: 1rem;
@@ -29,6 +30,7 @@
     &.affixed {
         position: fixed;
         top: 0;
+        padding: 4rem 1rem;
     }
 }
 
@@ -69,7 +71,7 @@
     display: block;
     padding: 2rem 1rem;
     font-size: 1rem;
-    line-height: 1.5em;
+    line-height: 1.75em;
     h1 {
         padding-bottom: 1rem;
         border-bottom: 1px solid $vue-light;
@@ -84,7 +86,7 @@
     @media (min-width: 768px) {
         display: inline-block;
         vertical-align: top;
-        width: calc(100% - 250px);
+        width: calc(100% - #{$nav-width});
         padding: 2rem;
     }
 }

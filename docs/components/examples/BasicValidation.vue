@@ -1,7 +1,12 @@
 <template>
     <div>
         <h2>Basic Form with Validation</h2>
-        <p></p>
+        <p>
+            The same form as above, now with validations added per Vuelidate's specifications.
+            Check the javascript tab to see how the validations were added, it's simple!
+            For more information on how to apply validations, see <a
+                href="https://monterail.github.io/vuelidate/#examples">Vuelidate's examples</a>.
+        </p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
                 <div class="column is-6">

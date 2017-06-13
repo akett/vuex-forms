@@ -15,6 +15,9 @@
                         <li :class="{'is-active': activeTrigger === 'installation' }">
                             <a href="#installation">Installation</a>
                         </li>
+                        <li :class="{'is-active': activeTrigger === 'activation' }">
+                            <a href="#activation">Activation</a>
+                        </li>
                         <li :class="{'is-active': activeTrigger === 'basic-usage' }">
                             <a href="#basic-usage">Basic Usage</a>
                         </li>
@@ -39,7 +42,7 @@
                         </li>
                     </ul>
 
-                    <a href="#form-class" class="nav-title">Form Class</a>
+                    <a href="#form-api" class="nav-title">Form API</a>
                     <ul class="nav-list">
                         <li :class="{'is-active': activeTrigger === 'usage' }">
                             <a href="#usage">Usage</a>
@@ -108,36 +111,41 @@
                         <a class="anchor" name="installation"></a>
                         <h2>Installation</h2>
                         <p>Install via npm or yarn</p>
-                        <pre v-highlightjs>
-<code class="shell no-lang">$ npm install vuex-forms --save</code>
-<code class="shell no-lang">$ yarn install vuex-forms</code>
-</pre>
-                        <p>You can also download the package and use the browser-ready bundle directly</p>
-                        <pre v-highlightjs>
-<code class="html no-lang">&lt;script src="vuex-forms/dist/VuexForms.min.js"&gt;&lt;/script&gt;</code>
-</pre>
+                        <pre v-highlightjs><code class="shell no-lang">$ npm install vuex-forms --save</code>
+<code class="shell no-lang">$ yarn install vuex-forms</code></pre>
+                        <p>Or, use the browser-ready bundle</p>
+                        <pre v-highlightjs><code class="html no-lang">&lt;script src="vuex-forms/dist/VuexForms.min.js"&gt;&lt;/script&gt;</code></pre>
                     </div>
 
                     <div class="doc-example">
-                        <a class="anchor" name="basic-usage"></a>
-                        <h2>Basic Usage</h2>
+                        <a class="anchor" name="activation"></a>
+                        <h2>Activation</h2>
                         <p>
-                            You can import the library and <kbd>use</kbd>
-                            it as a Vue plugin to install the <kbd>v-vuex-input</kbd>
-                            directive and all the form components globally.
+                            Now that it's installed, import the library and <kbd>use</kbd>
+                            it as a Vue plugin. This will install the <kbd>v-vuex-input</kbd>
+                            directive and the prebuilt form components
+                            (
+                            <kbd>&lt;vuex-text&gt;</kbd>
+                            <kbd>&lt;vuex-select&gt;</kbd>
+                            <kbd>&lt;vuex-checkbox&gt;</kbd>
+                            and
+                            <kbd>&lt;vuex-radio&gt;</kbd>
+                            )
+                            globally.
                         </p>
-                        <pre v-highlightjs>
-<code class="javascript">import Vue from "vue"
+                        <pre v-highlightjs><code class="javascript">import Vue from "vue"
 import VuexForms from "vuex-forms"
 Vue.use(VuexForms)
-</code>
-</pre>
-                        <p>
-                            Alternatively, you can simply import the <kbd>Form</kbd>
-                            class and any necessary form components directly to your components which will use them.
+</code></pre>
+                        <p>If you prefer <kbd>require</kbd> instead of <kbd>import</kbd>, use the destructuring syntax
                         </p>
-                        <pre v-highlightjs>
-<code class="javascript">import { Form } from "vuex-forms"
+                        <pre v-highlightjs><code
+                                class="javascript no-lang">const { VuexForms } = require("vuex-forms")</code></pre>
+                        <p>
+                            If you'd rather not install it globally, you can import the <kbd>Form</kbd>
+                            class and any necessary form components directly to where they will be used.
+                        </p>
+                        <pre v-highlightjs><code class="javascript">import { Form } from "vuex-forms"
 import VuexText from "vuex-forms/src/components/VuexText.vue"
 
 var MyComponent = Vue.extend({
@@ -150,32 +158,118 @@ var MyComponent = Vue.extend({
         }
     }
 })
-</code>
-</pre>
+</code></pre>
                         <p>
-                            If you're using the browser-ready bundle, simply include the script in your HTML and <kbd>use</kbd>
-                            it with Vue to make the form components available to your page
+                            For browser-ready bundle users, access the <kbd>VuexForms</kbd>
+                            module using destructuring syntax
+                            and <kbd>use</kbd> it with Vue to activate it.
                         </p>
-                        <pre v-highlightjs>
-<code class="html">&lt;script src="vue.js"&gt;&lt;/script&gt;
+                        <pre v-highlightjs><code class="html">&lt;script src="vue.js"&gt;&lt;/script&gt;
 &lt;script src="vuex-forms/dist/VuexForms.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-  var { VuexForms, Form } = window.VuexForms
-  var { required } = window.validators
+    var { VuexForms, Form } = window.VuexForms
+    var { required } = window.validators
 
-  Vue.use(VuexForms)
+    Vue.use(VuexForms)
 
-  var app = new Vue({
-    el: '#app',
-    data () {
-      return {
-        form: new Form(this, {yourData}, {configOptions}),
-      }
-    }
-  })
+    var app = new Vue({
+        el: '#app',
+        data () {
+            return {
+                form: new Form(this, {yourData}, {configOptions}),
+            }
+        }
+    })
 &lt;/script&gt;
-</code>
-</pre>
+</code></pre>
+                    </div>
+
+                    <div class="doc-example">
+                        <a class="anchor" name="basic-usage"></a>
+                        <h2>Basic Usage</h2>
+                        <p>
+                            The functionality of this package revolves around the <kbd>Form</kbd>
+                            class. It is responsible for handling your form data, communicating with the form
+                            components, handling validation, and form submission. It accepts 3 arguments, the first
+                            is the current component instance <kbd>this</kbd>, the second is an object containing
+                            your desired form keys, and the third is a configuration object that allows you to configure
+                            the behavior of your form.
+                        </p>
+                        <p>
+                            To use it, you simply need to define a key on your components' <kbd>data()</kbd> object
+                            which will receive an instance of <kbd>Form</kbd>.
+                            <br/>
+                            (below, the key is aptly named <kbd>form</kbd>, but it can be whatever you want it to be)
+                        </p>
+                        <pre v-highlightjs><code class="javascript">import { Form } from "vuex-forms"
+...
+data() {
+    return {
+        form: new Form(this, {yourFormKeys})
+    }
+}
+...</code></pre>
+                        <p>
+                            Internally, the <kbd>Form</kbd> class clones and stores any form keys you pass to it.
+                            This allows you to use an object from your Vuex store without worrying about mutation
+                            errors. Of course, you can manually define the form keys if you aren't using Vuex.
+                        </p>
+                        <p>With Vuex:</p>
+                        <pre v-highlightjs><code class="javascript no-lang">...
+data() {
+    return {
+        form: new Form(this, this.$store.state.yourFormObject)
+    }
+}
+...</code></pre>
+                        <p>Without Vuex:</p>
+                        <pre v-highlightjs><code class="javascript no-lang">...
+data() {
+    return {
+        form: new Form(this, {
+            name: null,
+            city: null,
+        })
+    }
+}
+...</code></pre>
+                        <p>
+                            With your form keys now populating the <kbd>Form</kbd> class, the last thing you need to
+                            worry about is how the form will be submitted, AJAX submission is currently non-functional,
+                            so for now we will only focus on submission via Vuex.
+                        </p>
+                        <p>
+                            The <kbd>Form</kbd> class expects that you have a Vuex action that will receive the
+                            form keys as a single argument, and that's really it. Of course it's recommended to have
+                            that action return a <kbd>Promise</kbd> that submits the form data via your own AJAX handler
+                            to a server for validation, which then will <kbd>commit</kbd> a mutation to save the
+                            now validated data back into your store, or <kbd>reject()</kbd> with the validation messages
+                            should server validation fail, but all the <kbd>Form</kbd> class really cares about is that
+                            there is a Vuex action it can submit to -
+                            after that it's up to you how that data is processed.
+                        </p>
+                        <p>
+                            If you choose to validate server-side, and would like those validation messages to be
+                            displayed on your form, visit the <a href="#validation">Validation</a> section to learn how
+                            to structure your Vuex actions to return the server validation messages to the
+                            <kbd>Form</kbd> class.
+                        </p>
+                        <p>
+                            Once you have a Vuex action set up to receive the form data, you simply need to pass
+                            the name of that action in the <kbd>Form</kbd>'s configuration object
+                        </p>
+                        <pre v-highlightjs><code class="javascript no-lang">...
+data() {
+    return {
+        form: new Form(this, {yourData}, {
+            vuexAction: 'YOUR_VUEX_ACTION'
+        })
+    }
+}
+...</code></pre>
+                        <p>
+                            For those that don't want to use Vuex at all, have no fear, an AJAX only method is coming soon!
+                        </p>
                     </div>
 
                 </section>
@@ -211,8 +305,8 @@ var MyComponent = Vue.extend({
                 </section>
 
 
-                <a class="anchor" name="form-class"></a>
-                <h1>Form Class</h1>
+                <a class="anchor" name="form-api"></a>
+                <h1>Form API</h1>
                 <section class="doc-section">
 
                     <div class="doc-example">
@@ -498,7 +592,7 @@ var MyComponent = Vue.extend({
         methods: {
             onScroll() {
                 let scrollBounds = this.$refs.docs.getBoundingClientRect()
-                this.affixed     = scrollBounds.top <= -60
+                this.affixed     = scrollBounds.top <= 0
                 this.affixOffset = (scrollBounds.bottom < 360)
                     ? Math.abs(scrollBounds.bottom - 360)
                     : 0
