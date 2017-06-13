@@ -124,3 +124,21 @@ $header-link-color: adjust_hue($vue-light, 90);
         margin: 0.5rem 1rem;
     }
 }
+
+.development-warning {
+    text-align: center;
+    margin-top: 60px;
+    .button {
+        background-color: #2ca02c;
+        border-color: #2ca02c;
+        color: #fff;
+        &:hover {
+            background-color: lighten(#2ca02c, 5);
+            border-color: lighten(#2ca02c, 5);
+            color: #fff;
+        }
+    }
+    h2 {
+        margin-top: 3rem;
+    }
+}

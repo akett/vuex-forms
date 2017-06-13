@@ -196,13 +196,11 @@ var MyComponent = Vue.extend({
 
                     <div class="doc-example">
                         <a class="anchor" name="dynamic-validation"></a>
-                        <h2>Dynamic Validation</h2>
                         <dynamic-validation></dynamic-validation>
                     </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="nested-data"></a>
-                        <h2>Nested Data</h2>
                         <nested-example></nested-example>
                     </div>
 

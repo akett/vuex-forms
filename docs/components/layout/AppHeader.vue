@@ -47,6 +47,14 @@
                         </ul>
                     </div>
                 </div>
+                <div class="development-warning">
+                    <a class="button" href="https://github.com/andycrockett/vuex-forms">View on Github</a>
+                    <h2>
+                        <em>Note</em>: This project is early in development.
+                        <br/>
+                        Documentation is not complete, but is actively being worked on.
+                    </h2>
+                </div>
             </div>
         </div>
     </div>
