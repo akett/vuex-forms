@@ -7,7 +7,7 @@ import {
 } from "../types";
 
 let axios = Axios.create({
-    baseURL: 'http://vuex-forms.local/api/',
+    baseURL: '/api/',
     timeout: 12000
 })
 
