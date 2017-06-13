@@ -1,5 +1,6 @@
 .table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
     border-spacing: 0;
     th {
@@ -19,4 +20,9 @@
             }
         }
     }
+}
+
+.table-scroller {
+    max-width: 100%;
+    overflow: auto;
 }

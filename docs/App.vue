@@ -247,213 +247,225 @@ var MyComponent = Vue.extend({
                         <a class="anchor" name="form-component-basics"></a>
                         <h2>The Basics</h2>
                         <p>All form components accept the following props:</p>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Prop</th>
-                                <th>Accepts Type</th>
-                                <th>Required</th>
-                                <th>Default</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><kbd>id</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>null</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>name</kbd></td>
-                                <td>String</td>
-                                <td>yes</td>
-                                <td>(none)</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>value</kbd></td>
-                                <td>Number, Boolean, String</td>
-                                <td>no</td>
-                                <td>null</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>label</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>null</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>placeholder</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>null</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>required</kbd></td>
-                                <td>Boolean</td>
-                                <td>no</td>
-                                <td>false</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>disabled</kbd></td>
-                                <td>Boolean</td>
-                                <td>no</td>
-                                <td>false</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>errors</kbd></td>
-                                <td>String, Object, Array</td>
-                                <td>no</td>
-                                <td>null</td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Prop</th>
+                                    <th>Accepts Type</th>
+                                    <th>Required</th>
+                                    <th>Default</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>id</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>null</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>name</kbd></td>
+                                    <td>String</td>
+                                    <td>yes</td>
+                                    <td>(none)</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>value</kbd></td>
+                                    <td>Number, Boolean, String</td>
+                                    <td>no</td>
+                                    <td>null</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>label</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>null</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>placeholder</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>null</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>required</kbd></td>
+                                    <td>Boolean</td>
+                                    <td>no</td>
+                                    <td>false</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>disabled</kbd></td>
+                                    <td>Boolean</td>
+                                    <td>no</td>
+                                    <td>false</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>errors</kbd></td>
+                                    <td>String, Object, Array</td>
+                                    <td>no</td>
+                                    <td>null</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="vuex-text"></a>
                         <h2>vuex-text</h2>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Prop</th>
-                                <th>Accepts Type</th>
-                                <th>Required</th>
-                                <th>Allowed Values</th>
-                                <th>Default</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><kbd>type</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>text, textarea, tel, number, email, password, url</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>mask</kbd></td>
-                                <td>String, Boolean</td>
-                                <td>no</td>
-                                <td></td>
-                                <td>false</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>save-mask</kbd></td>
-                                <td>String, Boolean</td>
-                                <td>no</td>
-                                <td></td>
-                                <td>false</td>
-                            </tr>
-                            </tbody>
-                        </table>
+
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Prop</th>
+                                    <th>Accepts Type</th>
+                                    <th>Required</th>
+                                    <th>Allowed Values</th>
+                                    <th>Default</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>type</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>text, textarea, tel, number, email, password, url</td>
+                                    <td>text</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>mask</kbd></td>
+                                    <td>String, Boolean</td>
+                                    <td>no</td>
+                                    <td></td>
+                                    <td>false</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>save-mask</kbd></td>
+                                    <td>String, Boolean</td>
+                                    <td>no</td>
+                                    <td></td>
+                                    <td>false</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="vuex-select"></a>
                         <h2>vuex-select</h2>
 
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Prop</th>
-                                <th>Accepts Type</th>
-                                <th>Required</th>
-                                <th>Default</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><kbd>options</kbd></td>
-                                <td>String, Object, Array</td>
-                                <td>no</td>
-                                <td>[ ]</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>option_name</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>id</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>option_value</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>id</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>multiple</kbd></td>
-                                <td>boolean</td>
-                                <td>no</td>
-                                <td>false</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Prop</th>
+                                    <th>Accepts Type</th>
+                                    <th>Required</th>
+                                    <th>Default</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>options</kbd></td>
+                                    <td>String, Object, Array</td>
+                                    <td>no</td>
+                                    <td>[ ]</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>option_name</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>id</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>option_value</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>id</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>multiple</kbd></td>
+                                    <td>boolean</td>
+                                    <td>no</td>
+                                    <td>false</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="vuex-checkbox"></a>
                         <h2>vuex-checkbox</h2>
 
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Prop</th>
-                                <th>Accepts Type</th>
-                                <th>Required</th>
-                                <th>Default</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><kbd>true-value</kbd></td>
-                                <td>Number, Boolean, String</td>
-                                <td>no</td>
-                                <td>true</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>false-value</kbd></td>
-                                <td>Number, Boolean, String</td>
-                                <td>no</td>
-                                <td>false</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Prop</th>
+                                    <th>Accepts Type</th>
+                                    <th>Required</th>
+                                    <th>Default</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>true-value</kbd></td>
+                                    <td>Number, Boolean, String</td>
+                                    <td>no</td>
+                                    <td>true</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>false-value</kbd></td>
+                                    <td>Number, Boolean, String</td>
+                                    <td>no</td>
+                                    <td>false</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <div class="doc-example">
                         <a class="anchor" name="vuex-radio"></a>
                         <h2>vuex-radio</h2>
 
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Prop</th>
-                                <th>Accepts Type</th>
-                                <th>Required</th>
-                                <th>Default</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><kbd>options</kbd></td>
-                                <td>String, Object, Array</td>
-                                <td>no</td>
-                                <td>[ ]</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>option_name</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>id</td>
-                            </tr>
-                            <tr>
-                                <td><kbd>option_value</kbd></td>
-                                <td>String</td>
-                                <td>no</td>
-                                <td>id</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Prop</th>
+                                    <th>Accepts Type</th>
+                                    <th>Required</th>
+                                    <th>Default</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>options</kbd></td>
+                                    <td>String, Object, Array</td>
+                                    <td>no</td>
+                                    <td>[ ]</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>option_name</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>id</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>option_value</kbd></td>
+                                    <td>String</td>
+                                    <td>no</td>
+                                    <td>id</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </section>
             </div>
