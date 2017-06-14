@@ -4,10 +4,14 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import VueHighlightJS from "vue-highlightjs"
+import VueAnalytics from "vue-analytics"
 import VuexForms from "../src"
 
 Vue.use(VueHighlightJS)
 Vue.use(VuexForms)
+Vue.use(VueAnalytics, {
+    id: 'UA-100999435-3'
+})
 
 Vue.config.productionTip = false
 Vue.config.debug         = true
