@@ -85,6 +85,10 @@ $nav-width: 220px;
         position: fixed;
         top: 0;
         left: -$nav-width;
+        transition: left 0.3s ease;
+        &.mobile-nav {
+            left: 0;
+        }
     }
     .navigation-affix {
         position: fixed;
@@ -92,9 +96,6 @@ $nav-width: 220px;
         top: 0;
         padding: 4rem 1rem !important;
         background-color: $background-color;
-    }
-    .nav-toggle:checked + .navigation-pane {
-        left: 0;
     }
 }
 

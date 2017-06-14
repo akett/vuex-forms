@@ -3,21 +3,20 @@
         <api-reporter></api-reporter>
 
         <div :class="{ 'navigation-header': true, 'affixed': affixed }">
-            <label for="nav-toggle">
+            <label @click="showMobileNav = !showMobileNav">
                 <div class="hamburger">
                     <div class="lettuce"></div>
                     <div class="tomato"></div>
                     <div class="beef"></div>
                 </div>
+                VuexForms
             </label>
-            VuexForms
         </div>
 
         <app-header></app-header>
 
         <div class="docs" ref="docs">
-            <input type="checkbox" id="nav-toggle" name="nav-toggle" class="nav-toggle" ref="nav_toggle">
-            <div class="navigation-pane">
+            <div :class="{'navigation-pane': true, 'mobile-nav': showMobileNav }">
                 <div :class="{ 'navigation-affix': true, 'affixed': affixed }">
                     <a href="#getting-started" class="nav-title">Getting Started</a>
                     <ul class="nav-list">
@@ -581,6 +580,7 @@ data() {
             scrollTolerance: 100,
             scrollTimeout: 50,
             scrollTimedOut: false,
+            showMobileNav: false,
         }),
         mounted() {
             this.triggers = this.$el.querySelectorAll('.anchor')
