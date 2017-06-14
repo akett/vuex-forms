@@ -1,9 +1,11 @@
 {
   "name": "vuex-forms",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Comprehensive form management for Vue.js, built with Vuex in mind.",
   "author": "Andy Crockett",
   "main": "src/index.js",
+  "license": "MIT",
+  "repository": "andycrockett/vuex-forms",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
