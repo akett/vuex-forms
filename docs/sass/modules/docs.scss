@@ -26,8 +26,8 @@ $nav-width: 220px;
     top: 0;
     left: 0;
     right: 0;
-    height: 30px;
-    padding: 4px;
+    height: 40px;
+    padding: 10px;
     width: 100%;
     font-size: 0.75rem;
     line-height: 15px;
@@ -85,7 +85,6 @@ $nav-width: 220px;
         position: fixed;
         top: 0;
         left: -$nav-width;
-        transition: left 0.3s ease;
     }
     .navigation-affix {
         position: fixed;
