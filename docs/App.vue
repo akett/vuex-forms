@@ -2,19 +2,20 @@
     <div id="app">
         <api-reporter></api-reporter>
 
+        <div :class="{ 'navigation-header': true, 'affixed': affixed }">
+            <label for="nav-toggle">
+                <div class="hamburger">
+                    <div class="lettuce"></div>
+                    <div class="tomato"></div>
+                    <div class="beef"></div>
+                </div>
+            </label>
+            VuexForms
+        </div>
+
         <app-header></app-header>
 
         <div class="docs" ref="docs">
-            <div :class="{ 'navigation-header': true, 'affixed': affixed }">
-                <label for="nav-toggle">
-                    <div class="hamburger">
-                        <div class="lettuce"></div>
-                        <div class="tomato"></div>
-                        <div class="beef"></div>
-                    </div>
-                </label>
-                VuexForms
-            </div>
             <input type="checkbox" id="nav-toggle" name="nav-toggle" class="nav-toggle" ref="nav_toggle">
             <div class="navigation-pane">
                 <div :class="{ 'navigation-affix': true, 'affixed': affixed }">

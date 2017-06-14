@@ -20,8 +20,8 @@ $nav-width: 220px;
 }
 
 .navigation-header {
-    display: none;
-    position: absolute;
+    display: block;
+    position: fixed;
     z-index: 1000;
     top: 0;
     left: 0;
@@ -29,12 +29,19 @@ $nav-width: 220px;
     height: 30px;
     padding: 4px;
     width: 100%;
-    background: transparentize($background-color, 0.1);
     font-size: 0.75rem;
     line-height: 15px;
+    background: rgba(255, 255, 255, 0.25);
+    color: #000;
+    .hamburger > div {
+        background: #000;
+    }
     &.affixed {
-        display: block;
-        position: fixed;
+        background: transparentize($background-color, 0.1);
+        color: #FFF;
+        .hamburger > div {
+            background: #FFF;
+        }
     }
 }
 
@@ -44,10 +51,9 @@ $nav-width: 220px;
     width: 20px;
     height: 20px;
     padding: 4px 2px;
-    .lettuce, .tomato, .beef {
+    & > div {
         width: 15px;
         height: 2px;
-        background: #fff;
         margin-top: 3px;
     }
     .lettuce {
@@ -62,9 +68,6 @@ $nav-width: 220px;
 @media (min-width: 768px) {
     .navigation-header {
         display: none;
-        &.affixed {
-            display: none;
-        }
     }
 }
 
@@ -80,10 +83,15 @@ $nav-width: 220px;
     .navigation-pane {
         display: block;
         position: fixed;
+        top: 0;
         left: -$nav-width;
         transition: left 0.3s ease;
     }
     .navigation-affix {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        padding: 4rem 1rem !important;
         background-color: $background-color;
     }
     .nav-toggle:checked + .navigation-pane {
