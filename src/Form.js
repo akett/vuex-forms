@@ -23,6 +23,7 @@ const defaultConfig = {
 const VUEX_FORM = 'VUEX'
 const AJAX_FORM = 'AJAX'
 
+// thanks Vuelidate for the following
 let _cachedVue = null
 function getVue(rootVm) {
     if (_cachedVue) return _cachedVue
@@ -36,12 +37,15 @@ function getVue(rootVm) {
 export default class Form {
     constructor(vm, data, config = {}, apiHandler = null) {
         let Vue            = getVue(vm)
-        // define core properties (mostly for reference)
+        // define all properties (for reference)
         this.errors        = new Errors()
+        this.$bus          = new Vue()
         this._config       = {}
         this._data         = {}
-        this._submitter    = null
         this._hasValidator = false
+        this._submitter    = null
+        this._vuex         = false
+        this._ajax         = false
         this._timers       = {
             inputDebounce: 0,
         }
@@ -96,7 +100,7 @@ export default class Form {
         if (this._submitter === VUEX_FORM) {
             this._vuex = vm.$store
         } else {
-            this._api = apiHandler
+            this._ajax = apiHandler
         }
     }
 
@@ -128,7 +132,7 @@ export default class Form {
         }
     }
 
-    // use a level count to construct an array of possible validations
+    // look for validation rules in nested data, save a dot notated path to any nested rules
     parseValidations(validations, previousMap = null) {
         for (let field in validations) {
             if (validations.hasOwnProperty(field) && typeof validations[field] === 'object') {
@@ -188,7 +192,7 @@ export default class Form {
             this.$v.$reset()
         }
 
-        this.onReset()
+        this.$bus.$emit('reset')
     }
 
     resetNestedData(dataObject) {
@@ -214,7 +218,7 @@ export default class Form {
             if (Object.keys(errors).length > 0) return Promise.reject(errors)
         }
 
-        if(this._submitter === null) {
+        if (this._submitter === null) {
             console.log('This form isn\'t configured to submit to anything!')
             return false;
         }
@@ -223,11 +227,12 @@ export default class Form {
         return new Promise((resolve, reject) => {
             return this._vuex.dispatch(this._config.vuexAction, this.data())
                 .then(data => {
-                    this.onSuccess(data)
+                    this.errors.clear()
                     resolve(data)
                 })
                 .catch(errors => {
-                    this.onFail(errors)
+                    this.errors.clear()
+                    this.errors.record(errors)
                     reject(errors)
                 })
         })
@@ -256,21 +261,21 @@ export default class Form {
                         this._timers.inputDebounce = setTimeout(() => this.validate(event.field), this._config.inputDebounce)
                     }
                 }
-                this.onInput(event.field, event.payload)
+                this.$bus.$emit('input', event)
                 break;
             case 'blur':
                 if (this.hasValidator(event.field)) {
                     if (this._config.touchOnBlur) field.$touch()
                     if (this._config.validateOnBlur) this.validate(event.field)
                 }
-                this.onBlur(event.field, event.payload)
+                this.$bus.$emit('blur', event)
                 break;
             case 'focus':
                 if (this.hasValidator(event.field)) {
                     if (this._config.touchOnFocus) field.$touch()
                     if (this._config.validateOnFocus) this.validate(event.field)
                 }
-                this.onFocus(event.field, event.payload)
+                this.$bus.$emit('focus', event)
                 break;
         }
     }
@@ -345,42 +350,8 @@ export default class Form {
             }
         }
 
-        // combine any additional error messages from onValidate() with the translated messages
-        errors = Object.assign({}, errors, this.onValidate())
-
         this.errors.record(errors)
 
         return errors
-    }
-
-    onInput(target, event) {
-        // do something with event - {target:{id: ID, value: VALUE}}
-    }
-
-    onFocus(target, event) {
-        // do something with event - {target:{id: ID, value: VALUE}}
-    }
-
-    onBlur(target, event) {
-        // do something with event - {target:{id: ID, value: VALUE}}
-    }
-
-    onReset() {
-        // do something after reset
-    }
-
-    onValidate() {
-        // use to inject custom validation messages into the errors object
-        // expects an object, keyed by the field name with an array of strings as the value
-        return {}
-    }
-
-    onSuccess(data) {
-        this.errors.clear()
-    }
-
-    onFail(errors) {
-        this.errors.clear()
-        this.errors.record(errors)
     }
 }

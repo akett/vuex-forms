@@ -38,12 +38,17 @@ const VuexForms = {
                     // input event validation has a debounce timer, use setTimeout to wait for the validation to happen
                     setTimeout(() => {
                         component.localErrors = form.errors.get(field)
-                    }, event.type === 'input' ? form._config.inputDebounce + 5 : 0)
+                    }, event.type === 'input' ? (form._config.inputDebounce + 5) : 0)
+                })
+                form.$bus.$on('reset', () => {
+                    component.tempValue   = null
+                    component.localErrors = null
                 })
             },
             unbind(el, binding, value) {
                 value.child.$off('event')
                 value.child.$off('input')
+                binding.value.$bus.$off('reset')
             }
         })
     }
