@@ -61,10 +61,6 @@ $nav-width: 220px;
     }
 }
 
-.nav-toggle {
-    display: none;
-}
-
 @media (min-width: 768px) {
     .navigation-header {
         display: none;
@@ -80,22 +76,17 @@ $nav-width: 220px;
 }
 
 @media (max-width: 767px) {
-    .navigation-pane {
-        display: block;
+    .navigation-affix {
+        padding: 4rem 1rem !important;
+        background-color: $background-color;
         position: fixed;
+        z-index: 999;
         top: 0;
         left: -$nav-width;
         transition: left 0.3s ease;
         &.mobile-nav {
             left: 0;
         }
-    }
-    .navigation-affix {
-        position: fixed;
-        z-index: 1000;
-        top: 0;
-        padding: 4rem 1rem !important;
-        background-color: $background-color;
     }
 }
 
@@ -107,7 +98,7 @@ $nav-width: 220px;
     font-size: 1rem;
     &.affixed {
         position: fixed;
-        z-index: 1000;
+        z-index: 999;
         top: 0;
         padding: 4rem 1rem;
     }

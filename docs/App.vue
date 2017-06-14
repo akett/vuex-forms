@@ -16,8 +16,8 @@
         <app-header></app-header>
 
         <div class="docs" ref="docs">
-            <div :class="{'navigation-pane': true, 'mobile-nav': showMobileNav }">
-                <div :class="{ 'navigation-affix': true, 'affixed': affixed }">
+            <div class="navigation-pane">
+                <div :class="{ 'navigation-affix': true, 'affixed': affixed, 'mobile-nav': showMobileNav }">
                     <a href="#getting-started" class="nav-title">Getting Started</a>
                     <ul class="nav-list">
                         <li :class="{'is-active': activeTrigger === 'introduction' }">
