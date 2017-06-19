@@ -577,7 +577,7 @@ data() {
             affixOffset: 0,
             triggers: [],
             activeTrigger: 'getting-started',
-            scrollTolerance: 100,
+            scrollTolerance: 300,
             scrollTimeout: 50,
             scrollTimedOut: false,
             showMobileNav: false,

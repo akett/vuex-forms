@@ -15,7 +15,6 @@ class Masker {
         let movementOffset = (keyCode !== 8 && keyCode !== 46)
             ? 1
             : (keyCode !== 8) ? 0 : -1;
-        console.log(movementOffset)
         setTimeout(() => {
             caretPosition.set(el, this.caretPosition + movementOffset);
         }, 0)

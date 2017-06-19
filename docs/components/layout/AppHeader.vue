@@ -5,7 +5,7 @@
                 <img src="../../assets/logo.png" class="logo">
                 <h1 class="header-title">
                     Vuex<span class="lighter">Forms</span>
-                    <span class="version">v0.0.2 (alpha)</span>
+                    <span class="version">v0.0.4 (alpha)</span>
                 </h1>
             </div>
             <p class="slogan">
@@ -21,9 +21,10 @@
                             <li>Use any data source to populate your forms</li>
                             <li>Dispatch form data via Vuex or AJAX</li>
                             <li>Loosely-coupled presentation system</li>
-                            <li>Minimal logic required for components</li>
+                            <li>Minimal logic required in components</li>
                             <li>Mixins for quick custom components</li>
                             <li>Easy to use input masking</li>
+                            <li>Vuex NOT required</li>
                         </ul>
                     </div>
                     <div class="column is-6">
@@ -31,17 +32,17 @@
                             <li>Robust validation, powered by <a
                                     href="https://monterail.github.io/vuelidate/">Vuelidate</a>
                             </li>
-                            <li>20+ <a href="https://laravel.com/">Laravel</a> inspired validation rules</li>
-                            <li>Template-decoupled validation messages</li>
+                            <li>20+ <a href="https://laravel.com/">Laravel</a> inspired validations (coming soon!)</li>
+                            <li>Built-in validation message system</li>
                             <li>Custom validation rules & messages</li>
                             <li>Localization for messages</li>
-                            <li>Configurable behavior</li>
+                            <li>Configurable validation behavior</li>
                             <li>
                                 Minimal dependencies
                                 <br/>
                                 <small>
                                     (<a href="https://monterail.github.io/vuelidate/">Vuelidate</a>,
-                                    optionally <a href="https://vuex.vuejs.org/">Vuex</a>)
+                                    <a href="https://github.com/yeikos/js.merge">merge</a>)
                                 </small>
                             </li>
                         </ul>

@@ -9,14 +9,12 @@ export default {
         disabled: {type: Boolean, default: false},
         errors: {type: [String, Object, Array], default: null},
     },
-    data () {
-        return {
-            masker: false,
-            tempValue: null,
-            activeKeyCode: 0,
-            localErrors: null,
-        }
-    },
+    data: () => ({
+        masker: false,
+        tempValue: null,
+        activeKeyCode: 0,
+        localErrors: null
+    }),
     computed: {
         fieldErrors() {
             return this.errors || this.localErrors

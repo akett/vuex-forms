@@ -1,10 +1,10 @@
 import Form from "./Form"
 import Errors from "./Errors"
 
-import VuexText from './components/VuexText.vue';
-import VuexCheckbox from './components/VuexCheckbox.vue';
-import VuexRadio from './components/VuexRadio.vue';
-import VuexSelect from './components/VuexSelect.vue';
+import VuexText from './components/VuexText';
+import VuexCheckbox from './components/VuexCheckbox';
+import VuexRadio from './components/VuexRadio';
+import VuexSelect from './components/VuexSelect';
 
 const VuexForms = {
     install(Vue, options) {
