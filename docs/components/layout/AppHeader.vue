@@ -5,7 +5,7 @@
                 <img src="../../assets/logo.png" class="logo">
                 <h1 class="header-title">
                     Vuex<span class="lighter">Forms</span>
-                    <span class="version">v0.0.4 (alpha)</span>
+                    <span class="version">v0.0.5 (alpha)</span>
                 </h1>
             </div>
             <p class="slogan">
