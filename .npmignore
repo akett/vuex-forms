@@ -5,5 +5,4 @@ docs
 .*
 yarn.lock
 circle.yml
-*.html
 *.tgz
