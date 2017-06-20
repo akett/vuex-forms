@@ -14,8 +14,8 @@ function resolve(dir) {
 // refer to .babelrc for lib configuration
 
 base.entry = {
-    'VuexForms': './src/index.js',
-    'validators': './src/validators/index.js'
+    'VuexForms': './lib/index.js',
+    'validators': './lib/validators/index.js'
 }
 
 base.output = {

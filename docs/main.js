@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 import VueHighlightJS from "vue-highlightjs"
-import VuexForms from "../src"
+import VuexForms from "../lib"
 
 Vue.use(VueHighlightJS)
 Vue.use(VuexForms)

@@ -130,13 +130,13 @@ export default {
 </template>
 
 <script>
-    import {Form} from "../../../src"
+    import {Form} from "../../../lib"
     import {
         required,
         email,
         minLength,
         maxLength,
-    } from "../../../src/validators"
+    } from "../../../lib/validators"
 
     export default {
         name: 'BasicValidation',
