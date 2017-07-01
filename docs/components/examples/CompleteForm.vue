@@ -1,7 +1,11 @@
 <template>
     <div>
         <h2>Complete Form</h2>
-        <p></p>
+        <p>
+            A full featured form - lots of fields, validations, and it submits to a server for validation!
+            Open up your DevTools and check the Network tab to see what kind of response is required for server-side
+            validation messages.
+        </p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
                 <div class="column is-6">
@@ -16,18 +20,14 @@
                                 <vuex-text label="Name"
                                            id="name"
                                            name="name"
-                                           v-model="form.name"
-                                           :errors="form.errors.get('name')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:name="form"
                                 ></vuex-text>
 
                                 <vuex-text type="email"
                                            label="Email"
                                            id="email"
                                            name="email"
-                                           v-model="form.email"
-                                           :errors="form.errors.get('email')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:email="form"
                                 ></vuex-text>
 
                                 <vuex-text type="tel"
@@ -35,17 +35,13 @@
                                            label="Phone"
                                            id="phone"
                                            name="phone"
-                                           v-model="form.phone"
-                                           :errors="form.errors.get('phone')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:phone="form"
                                 ></vuex-text>
 
                                 <vuex-text label="City"
                                            id="city"
                                            name="city"
-                                           v-model="form.city"
-                                           :errors="form.errors.get('city')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:city="form"
                                 ></vuex-text>
 
                                 <vuex-select label="State"
@@ -54,9 +50,7 @@
                                              :options="states"
                                              option_name="name"
                                              option_value="abbr"
-                                             v-model="form.state"
-                                             :errors="form.errors.get('state')"
-                                             @event="form.listen($event)"
+                                             v-input-sync:state="form"
                                 ></vuex-select>
 
                                 <vuex-text label="Zip Code"
@@ -64,9 +58,7 @@
                                            :save-mask="true"
                                            id="zip"
                                            name="zip"
-                                           v-model="form.zip"
-                                           :errors="form.errors.get('zip')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:zip="form"
                                 ></vuex-text>
 
                             </div>
@@ -76,27 +68,21 @@
                                            placeholder="http://"
                                            id="website"
                                            name="website"
-                                           v-model="form.website"
-                                           :errors="form.errors.get('website')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:website="form"
                                 ></vuex-text>
 
                                 <vuex-text type="password"
                                            label="Password"
                                            id="password"
                                            name="password"
-                                           v-model="form.password"
-                                           :errors="form.errors.get('password')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:password="form"
                                 ></vuex-text>
 
                                 <vuex-text type="password"
                                            label="Confirm Password"
                                            id="password_confirmation"
                                            name="password_confirmation"
-                                           v-model="form.password_confirmation"
-                                           :errors="form.errors.get('password_confirmation')"
-                                           @event="form.listen($event)"
+                                           v-input-sync:password_confirmation="form"
                                 ></vuex-text>
 
                                 <vuex-radio label="Shipping Method"
@@ -105,25 +91,19 @@
                                             :options="shipping_options"
                                             option_name="name"
                                             option_value="value"
-                                            v-model="form.shipping_method"
-                                            :errors="form.errors.get('shipping_method')"
-                                            @event="form.listen($event)"
+                                            v-input-sync:shipping_method="form"
                                 ></vuex-radio>
 
                                 <vuex-checkbox label="Receive Updates"
                                                id="receive_updates"
                                                name="receive_updates"
-                                               v-model="form.receive_updates"
-                                               :errors="form.errors.get('receive_updates')"
-                                               @event="form.listen($event)"
+                                               v-input-sync:receive_updates="form"
                                 ></vuex-checkbox>
 
                                 <vuex-checkbox label="I agree the Terms & Conditions"
                                                id="terms_and_conditions"
                                                name="terms_and_conditions"
-                                               v-model="form.terms_and_conditions"
-                                               :errors="form.errors.get('terms_and_conditions')"
-                                               @event="form.listen($event)"
+                                               v-input-sync:terms_and_conditions="form"
                                 ></vuex-checkbox>
 
                             </div>
@@ -143,6 +123,10 @@
 
                     <validation-options :form="form"></validation-options>
                 </div>
+            </div>
+
+            <div slot="html">
+                <pre class="code" v-highlightjs><code class="html no-lang"></code></pre>
             </div>
         </doc-example>
     </div>

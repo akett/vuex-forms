@@ -18,18 +18,18 @@
                                    label="Minimum Name Length"
                                    id="nameLength"
                                    name="nameLength"
-                                   v-vuex-input:nameLength="form"
+                                   v-input-sync:nameLength="form"
                         ></vuex-text>
 
                         <vuex-text label="Name"
                                    id="name"
                                    name="name"
-                                   v-vuex-input:name="form"
+                                   v-input-sync:name="form"
                         ></vuex-text>
 
                         <div class="has-text-centered">
                             <button type="submit" class="button">Submit</button>
-                            <button type="reset" class="button" @click="form.reset()">Reset</button>
+                            <button type="button" class="button" @click="form.reset()">Reset</button>
                         </div>
                     </form>
                 </div>
@@ -47,13 +47,13 @@
                label="Minimum Name Length"
                id="nameLength"
                name="nameLength"
-               v-vuex-input:nameLength="form"
+               v-input-sync:nameLength="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text label="Name"
                id="name"
                name="name"
-               v-vuex-input:name="form"
+               v-input-sync:name="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;div class="has-text-centered"&gt;

@@ -14,9 +14,8 @@ export default () => merge.recursive(true, VuexField, {
         mask: {type: [Boolean, String], default: false},
         saveMask: {type: [Boolean, String], default: false},
     },
-    mounted() {
-        this.tempValue = this.tempValue || (this.value ? this.value.toString() : '')
-        this.masker    = new Masker()
+    beforeMount() {
+        this.masker = new Masker()
     },
     methods: {
 
@@ -66,7 +65,7 @@ export default () => merge.recursive(true, VuexField, {
                 event.target.value = this.applySaveMask(value)
             }
 
-            this.tempValue = value
+            this.value = value
             this.emitEvent('input', event)
         },
 

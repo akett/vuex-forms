@@ -62,6 +62,10 @@ export default class Form {
         }
     }
 
+    /**
+     * Applies any user-defined config options
+     * @param config
+     */
     setConfig(config = {}) {
         this._config = {}
         for (let option in defaultConfig) {
@@ -71,6 +75,10 @@ export default class Form {
         }
     }
 
+    /**
+     * Clones the defined form data and sets up getters so the form fields can be accessed like so: form.my_form_field
+     * @param data
+     */
     setupData(data) {
         this._data = Object.assign({}, {_original: data}, data);
         for (let field in data) {
@@ -87,8 +95,12 @@ export default class Form {
         }
     }
 
-    // Sets the submitter type - vuex or ajax - and prepares the Vuex store or whatever apiHandler you specified
-    // Note: this will give priority to Vuex if config options for both Vuex and AJAX are passed.
+    /**
+     * Sets up the form submitter for either VUEX or AJAX
+     * Note: if config options for both VUEX and AJAX are defined, VUEX takes precedence
+     * @param vm
+     * @param apiHandler
+     */
     setupSubmitter(vm, apiHandler) {
         if (this._config.vuexAction === false && this._config.ajaxURL === false) {
             this._submitter = false;
@@ -104,6 +116,11 @@ export default class Form {
         }
     }
 
+    /**
+     * Sets up the Vuelidate VM if any validations were defined
+     * @param Vue
+     * @returns {*}
+     */
     setupValidator(Vue) {
         // create a Vue instance for Vuelidate to live in
         if (this._config.validations !== null) {
@@ -132,14 +149,18 @@ export default class Form {
         }
     }
 
-    // look for validation rules in nested data, save a dot notated path to any nested rules
-    parseValidations(validations, previousMap = null) {
+    /**
+     * Looks for validation rules in nested data, saves a dot-notated path for any nested rules
+     * @param validations
+     * @param previousPath
+     */
+    parseValidations(validations, previousPath = null) {
         for (let field in validations) {
             if (validations.hasOwnProperty(field) && typeof validations[field] === 'object') {
                 for (let possibleRule in validations[field]) {
                     if (validations[field].hasOwnProperty(possibleRule)) {
                         if (typeof validations[field][possibleRule] === 'function') {
-                            let fieldMap = (previousMap !== null ? previousMap + '.' : '') + field
+                            let fieldMap = (previousPath !== null ? previousPath + '.' : '') + field
 
                             if (this._validations.hasOwnProperty(fieldMap)) {
                                 this._validations[fieldMap].push(possibleRule)
@@ -147,7 +168,7 @@ export default class Form {
                                 this._validations[fieldMap] = [possibleRule]
                             }
                         } else {
-                            this.parseValidations(validations[field][possibleRule], (previousMap !== null ? previousMap + '.' : '') + field + '.' + possibleRule)
+                            this.parseValidations(validations[field][possibleRule], (previousPath !== null ? previousPath + '.' : '') + field + '.' + possibleRule)
                         }
                     }
                 }
@@ -155,7 +176,10 @@ export default class Form {
         }
     }
 
-    // Returns only the form data for convenience
+    /**
+     * Returns only the form data for convenience, useful for implementing your own submission logic
+     * @returns {{}}
+     */
     data() {
         let data = {}
         for (let field in this._data._original) {
@@ -165,23 +189,16 @@ export default class Form {
         return data
     }
 
-    // RESET ----
-    // Clears any validation errors and sets the form data to null.
-    // NOTE: input components that make use of a `tempValue` can only have their values cleared if they
-    // ----- are wrapped in a <form> tag and you use an HTML reset button to call this method.
-    // Example:
-    // <form>
-    //   <tempvalue-input-component></tempvalue-input-component>
-    //   <button type="reset" @click="form.reset()">Reset</button>
-    //   <!-- Make sure not to use @click.prevent -->
-    // </form>
+    /**
+     * Clears any validation errors and sets the form data to null
+     */
     reset() {
         for (let field in this._data._original) {
             if (this._data.hasOwnProperty(field)) {
                 if (typeof this._data[field] === 'object') {
                     this.resetNestedData(this._data[field])
                 } else {
-                    this._data[field] = null
+                    this._data[field] = this._data._original[field]
                 }
             }
         }
@@ -195,19 +212,29 @@ export default class Form {
         this.$bus.$emit('reset')
     }
 
+    /**
+     * Loops through nested data, setting non-objects to null
+     * @param dataObject
+     */
     resetNestedData(dataObject) {
         for (let field in dataObject) {
             if (dataObject.hasOwnProperty(field)) {
                 if (typeof dataObject[field] === 'object') {
                     this.resetNestedData(dataObject[field])
                 } else {
-                    dataObject[field] = null
+                    dataObject[field] = this._data._original[field]
                 }
             }
         }
     }
 
-    // Submits the form using the submitter you specified in the config
+    /**
+     * Submits the form using the submitter specified by the config options.
+     * First it runs any client-side validation, and if no errors are found,
+     * attempts to submit.
+     * Returns false if no submitter was defined
+     * @returns {*}
+     */
     submit() {
         // before submission, validate all the fields and abort if errors are found
         if (this._hasValidator && this._config.validateOnSubmit) {
@@ -218,8 +245,7 @@ export default class Form {
             if (Object.keys(errors).length > 0) return Promise.reject(errors)
         }
 
-        if (this._submitter === null) {
-            console.log('This form isn\'t configured to submit to anything!')
+        if (this._submitter === false) {
             return false;
         }
 
@@ -239,8 +265,7 @@ export default class Form {
     }
 
     /**
-     * Listens for form events and handles them according.
-     *
+     * Receives form events and then validates the target field (if it has any validations)
      * @param event
      */
     listen(event) {
@@ -280,15 +305,23 @@ export default class Form {
         }
     }
 
-    // checks if the form is under any validation, optionally check if a specific field is under validation
+    /**
+     * Helper method to quickly check if this form has validation rules
+     * @param field
+     * @returns {boolean}
+     */
     hasValidator(field = null) {
         return field !== null
             ? this._hasValidator && this._validations.hasOwnProperty(field)
             : this._hasValidator
     }
 
-    // Reads the validation errors and translates them into validation messages
-    // - use targetField to only read messages for that field
+    /**
+     * Reads any validation errors given by Vuelidate and translates them into validation messages
+     * Specify a targetField to limit the generation of validation messages to one field
+     * @param targetField
+     * @returns {*}
+     */
     validate(targetField = null) {
         // if there is no validator or the validator is reporting no errors, abort
         if (!this._hasValidator || this.$v.$errors === false) return false
@@ -351,6 +384,8 @@ export default class Form {
         }
 
         this.errors.record(errors)
+
+        this.$bus.$emit('validate')
 
         return errors
     }

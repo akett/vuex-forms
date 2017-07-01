@@ -4,8 +4,6 @@
         <p>
             The same form as above, now with validations added per Vuelidate's specifications.
             Check the javascript tab to see how the validations were added, it's simple!
-            For more information on how to apply validations, see <a
-                href="https://monterail.github.io/vuelidate/#examples">Vuelidate's examples</a>.
         </p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
@@ -16,14 +14,14 @@
                         <vuex-text label="Name"
                                    id="name"
                                    name="name"
-                                   v-vuex-input:name="form"
+                                   v-input-sync:name="form"
                         ></vuex-text>
 
                         <vuex-text type="email"
                                    label="Email"
                                    id="email"
                                    name="email"
-                                   v-vuex-input:email="form"
+                                   v-input-sync:email="form"
                         ></vuex-text>
 
                         <vuex-text type="tel"
@@ -31,7 +29,7 @@
                                    label="Phone"
                                    id="phone"
                                    name="phone"
-                                   v-vuex-input:phone="form"
+                                   v-input-sync:phone="form"
                         ></vuex-text>
 
                         <vuex-text label="Zip Code"
@@ -39,7 +37,7 @@
                                    :save-mask="true"
                                    id="zip"
                                    name="zip"
-                                   v-vuex-input:zip="form"
+                                   v-input-sync:zip="form"
                         ></vuex-text>
 
 
@@ -64,14 +62,14 @@
     &lt;vuex-text label="Name"
                id="name"
                name="name"
-               v-vuex-input:name="form"
+               v-input-sync:name="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text type="email"
                label="Email"
                id="email"
                name="email"
-               v-vuex-input:email="form"
+               v-input-sync:email="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text type="tel"
@@ -79,7 +77,7 @@
                label="Phone"
                id="phone"
                name="phone"
-               v-vuex-input:phone="form"
+               v-input-sync:phone="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;vuex-text label="Zip Code"
@@ -87,7 +85,7 @@
                :save-mask="true"
                id="zip"
                name="zip"
-               v-vuex-input:zip="form"
+               v-input-sync:zip="form"
     &gt;&lt;/vuex-text&gt;
 
     &lt;div class="has-text-centered"&gt;
@@ -130,13 +128,13 @@ export default {
 </template>
 
 <script>
-    import {Form} from "../../../lib"
+    import {Form} from "../../../src"
     import {
         required,
         email,
         minLength,
         maxLength,
-    } from "../../../lib/validators"
+    } from "../../../src/validators"
 
     export default {
         name: 'BasicValidation',

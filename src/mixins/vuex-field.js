@@ -2,7 +2,6 @@ export default {
     props: {
         id: {type: String, default: null},
         name: {type: String, required: true},
-        value: {type: [Number, Boolean, String], default: null},
         label: {type: String, default: null},
         placeholder: {type: String, default: null},
         required: {type: Boolean, default: false},
@@ -11,7 +10,7 @@ export default {
     },
     data: () => ({
         masker: false,
-        tempValue: null,
+        value: null,
         activeKeyCode: 0,
         localErrors: null
     }),
@@ -35,7 +34,7 @@ export default {
         },
 
         inputEvent(event) {
-            this.tempValue = event.target.value
+            this.value = event.target.value
             this.emitEvent('input', event)
         },
 

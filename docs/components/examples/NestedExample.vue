@@ -1,6 +1,12 @@
 <template>
     <div>
         <h2>Nested Data</h2>
+        <p>
+            The <kbd>Form</kbd> class and validation system can handle nested data as deep as your data structure requires.
+            Although the <kbd>v-input-sync</kbd> directive currently does not support nested data, you can
+            manually circumvent the directive by defining <kbd>v-model</kbd>, <kbd>:errors</kbd>, and <kbd>@event</kbd>
+            on your input component. Check out the HTML tab to learn how this works.
+        </p>
         <doc-example>
             <div slot="result" class="columns is-desktop">
                 <div class="column is-6">
