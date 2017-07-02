@@ -8,7 +8,7 @@ export default () => merge.recursive(true, VuexField, {
             type: String,
             default: 'text',
             validator: value => {
-                return ['text', 'textarea', 'tel', 'number', 'email', 'password', 'url'].indexOf(value) !== -1
+                return ['text', 'textarea', 'tel', 'number', 'email', 'password', 'url', 'date'].indexOf(value) !== -1
             }
         },
         mask: {type: [Boolean, String], default: false},

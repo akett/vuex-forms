@@ -46,13 +46,13 @@ export default {
             this.emitEvent('focus', event)
         },
 
-        createEvent(event, type) {
+        createEvent(event, type, overrideValue = null) {
             return {
                 type,
                 target: {
                     id: event.target.id,
                     name: event.target.name,
-                    value: event.target.value
+                    value: overrideValue ? overrideValue : event.target.value
                 }
             }
         },

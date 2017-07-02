@@ -3,6 +3,7 @@ export default {
         let form      = binding.value
         let field     = binding.arg
         let component = value.child
+        // get the nested field path (TODO)
         if (binding.modifiers) {
             for (let modifier in binding.modifiers) {
                 field += '.' + modifier
@@ -10,7 +11,9 @@ export default {
         }
         component.value       = form[field]
         component.localErrors = form.errors.get(field)
+
         component.$on('input', (inputValue) => {
+            // TODO: nested field handling
             if (field.indexOf('.') !== -1) {
                 //field.split('.').reduce((o, i) => o[i], form)
                 console.log('still working on nested data for the directive')
@@ -20,7 +23,7 @@ export default {
         })
         component.$on('event', (event) => {
             form.listen(event)
-            // input event validation has a debounce timer, use setTimeout to wait for the validation to happen
+            // input event validation has a debounce timer, use setTimeout to wait for validation to happen
             setTimeout(() => {
                 component.localErrors = form.errors.get(field)
             }, event.type === 'input' ? (form._config.inputDebounce + 50) : 0)

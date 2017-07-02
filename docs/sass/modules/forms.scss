@@ -27,7 +27,7 @@
 .form-control {
     font-family: inherit;
     font-size: inherit;
-    &[type='text'], &[type='email'], &[type='password'], &[type='tel'], &[type='number'] {
+    &[type='text'], &[type='email'], &[type='password'], &[type='tel'], &[type='number'], &[type='date'] {
         @include form-control-style;
         &::placeholder {
             color: #aaa;

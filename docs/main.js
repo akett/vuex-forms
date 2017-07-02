@@ -18,6 +18,7 @@ import AppHeader from "./components/layout/AppHeader.vue";
 import DocExample from "./components/layout/DocExample.vue";
 import ValidationOptions from "./components/ValidationOptions.vue";
 
+import ValidationDemonstration from "./components/sections/ValidationDemonstration.vue";
 import Introduction from "./components/sections/Introduction.vue";
 import Installation from "./components/sections/Installation.vue";
 import Setup from "./components/sections/Setup.vue";
@@ -35,6 +36,7 @@ Vue.component('app-header', AppHeader)
 Vue.component('doc-example', DocExample)
 Vue.component('validation-options', ValidationOptions)
 
+Vue.component('validation-demonstration', ValidationDemonstration)
 Vue.component('introduction', Introduction)
 Vue.component('installation', Installation)
 Vue.component('setup', Setup)

@@ -13,7 +13,9 @@
             </label>
         </div>
 
-        <app-header></app-header>
+        <div @click="showMobileNav = false">
+            <app-header></app-header>
+        </div>
 
         <div class="docs" ref="docs">
             <div class="navigation-pane">
@@ -58,9 +60,6 @@
 
                     <a href="#form-api" class="nav-title">Form API</a>
                     <ul class="nav-list">
-                        <li :class="{'is-active': activeTrigger === 'usage' }">
-                            <a href="#usage">Usage</a>
-                        </li>
                         <li :class="{'is-active': activeTrigger === 'configuration' }">
                             <a href="#configuration">Configuration</a>
                         </li>
@@ -70,6 +69,9 @@
                     <ul class="nav-list">
                         <li :class="{'is-active': activeTrigger === 'available-rules' }">
                             <a href="#available-rules">Available Rules</a>
+                        </li>
+                        <li :class="{'is-active': activeTrigger === 'full-demonstration' }">
+                            <a href="#full-demonstration">Full Demonstration</a>
                         </li>
                     </ul>
 
@@ -94,7 +96,7 @@
                 </div>
             </div>
 
-            <div class="content-area">
+            <div class="content-area" @click="showMobileNav = false">
 
                 <a class="anchor" name="getting-started"></a>
                 <h1>Getting Started</h1>
@@ -159,17 +161,111 @@
 
 
                 <a class="anchor" name="form-api"></a>
-                <h1>Form API</h1>
+                <h1>Form Class</h1>
                 <section class="doc-section">
-
-                    <div class="doc-example">
-                        <a class="anchor" name="usage"></a>
-                        <h2>Usage</h2>
-                    </div>
+                    <p>
+                        This section is a work in progress. Coming soon is an overview of the available methods on the
+                        <kbd>Form</kbd> class and its' subclass <kbd>Errors</kbd> (for working with validation messages
+                        manually).
+                    </p>
 
                     <div class="doc-example">
                         <a class="anchor" name="configuration"></a>
-                        <h2>Configuration</h2>
+                        <h2>Configuration Options</h2>
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>vuexAction</kbd></td>
+                                    <td>false</td>
+                                    <td>The Vuex action used in the <kbd>submit</kbd> method</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>ajaxURL</kbd></td>
+                                    <td>false</td>
+                                    <td><em>non-functional</em></td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>ajaxMethod</kbd></td>
+                                    <td>POST</td>
+                                    <td><em>non-functional</em></td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>ajaxTimeout</kbd></td>
+                                    <td>10000</td>
+                                    <td><em>non-functional</em></td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>validations</kbd></td>
+                                    <td>null</td>
+                                    <td>An object containing the validations for your form (see the examples)</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>defaultMessages</kbd></td>
+                                    <td>validationMessages</td>
+                                    <td>
+                                        Pass an object keyed by the validation rules' names to replace the default
+                                        messages with your own
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>overrideMessages</kbd></td>
+                                    <td>{}</td>
+                                    <td>
+                                        Pass an object keyed by your form field names, then key the specific validation
+                                        rules to override messages for individual fields
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>validateOnInput</kbd></td>
+                                    <td>true</td>
+                                    <td>Trigger validation for a field on an input event</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>validateOnBlur</kbd></td>
+                                    <td>true</td>
+                                    <td>Trigger validation for a field on a blur event</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>validateOnFocus</kbd></td>
+                                    <td>false</td>
+                                    <td>Trigger validation for a field on a focus event</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>validateOnLoad</kbd></td>
+                                    <td>false</td>
+                                    <td>Trigger validation for all fields when the form is first created</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>validateOnSubmit</kbd></td>
+                                    <td>true</td>
+                                    <td>Trigger validation for all fields on a submit event</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>touchOnBlur</kbd></td>
+                                    <td>false</td>
+                                    <td>Make a field dirty on a blur event</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>touchOnFocus</kbd></td>
+                                    <td>false</td>
+                                    <td>Make a field dirty on a focus event</td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>inputDebounce</kbd></td>
+                                    <td>200</td>
+                                    <td>How long to wait before validating after an input event</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                 </section>
@@ -178,10 +274,161 @@
                 <a class="anchor" name="validation"></a>
                 <h1>Validation</h1>
                 <section class="doc-section">
+                    <p>
+                        This section is a work in progress. Coming soon is an explanation of how the validation message
+                        system works.
+                    </p>
+                    <p>
+                        For an in-depth explanation of how the validation rules work, see
+                        <a href="https://monterail.github.io/vuelidate/">Vuelidate's documentations</a>.
+                    </p>
 
                     <div class="doc-example">
                         <a class="anchor" name="available-rules"></a>
                         <h2>Available Rules</h2>
+                        <p>
+                            Here is a list of the validators provided exclusively by this package. For a list of the
+                            validators already included with Vuelidate, check out
+                            <a href="https://monterail.github.io/vuelidate/#sub-builtin-validators">their documentation</a>.
+                            <br/>
+                            <em>Note: all date validators use vanilla javascript</em>
+                        </p>
+
+                        <div class="table-scroller">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Parameters</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><kbd>accepted</kbd></td>
+                                    <td><em>none</em></td>
+                                    <td>
+                                        Ideal for fields such as a terms & conditions or a privacy policy checkbox,
+                                        informs the user they must accept the field.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>afterDate</kbd></td>
+                                    <td>date</td>
+                                    <td>
+                                        Requires a user selected date to be after the specified date.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>afterDateOrEqual</kbd></td>
+                                    <td>date</td>
+                                    <td>
+                                        Requires a user selected date to be after or equal to the specified date.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>alphaDash</kbd></td>
+                                    <td><em>none</em></td>
+                                    <td>
+                                        Accepts only alphanumeric characters, along with - and _
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>beforeDate</kbd></td>
+                                    <td>date</td>
+                                    <td>
+                                        Requires a user selected date to be before the specified date.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>beforeDateOrEqual</kbd></td>
+                                    <td>date</td>
+                                    <td>
+                                        Requires a user selected date to be before or equal to the specified date.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>betweenLength</kbd></td>
+                                    <td>min, max</td>
+                                    <td>
+                                        Requires that field is between MIN and MAX characters long
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>differentFrom</kbd></td>
+                                    <td>min, max</td>
+                                    <td>
+                                        Checks for inequality with a given property, insensitive to casing. Behaves like <em>sameAs</em>
+                                        from
+                                        Vuelidate.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>differentFromCased</kbd></td>
+                                    <td>min, max</td>
+                                    <td>
+                                        Checks for inequality with a given property, sensitive to casing.
+                                        Behaves like <em>sameAs</em> from Vuelidate.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>afterDate</kbd></td>
+                                    <td>date</td>
+                                    <td>
+                                        Requires a user selected date to be after the specified date.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>inArray</kbd></td>
+                                    <td>array of values</td>
+                                    <td>
+                                        Requires that the input equals one of the values supplied in the array
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>afterDate</kbd></td>
+                                    <td>date</td>
+                                    <td>
+                                        Requires a user selected date to be after the specified date.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>ipAddress</kbd></td>
+                                    <td><em>none</em></td>
+                                    <td>
+                                        Requires an input be a valid IPv4 or IPv6 address
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>ipv4</kbd></td>
+                                    <td><em>none</em></td>
+                                    <td>
+                                        Requires an input be a valid IPv4 address
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>ipv6</kbd></td>
+                                    <td><em>none</em></td>
+                                    <td>
+                                        Requires an input be a valid IPv6 address
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><kbd>notInArray</kbd></td>
+                                    <td>array of values</td>
+                                    <td>
+                                        Requires that the input does not equal one of the values supplied in the array
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="doc-example">
+                        <a class="anchor" name="full-demonstration"></a>
+                        <h2>Full Demonstration</h2>
+                        <validation-demonstration></validation-demonstration>
                     </div>
 
                 </section>
@@ -190,6 +437,11 @@
                 <a class="anchor" name="form-components"></a>
                 <h1>Form Components</h1>
                 <section class="doc-section">
+                    <p>
+                        This section is a work in progress. An in-depth explanation on creating your own custom
+                        components is coming soon! (for now you can try to figure it out using the provided mixins and
+                        component templates)
+                    </p>
                     <div class="doc-example">
                         <a class="anchor" name="form-component-basics"></a>
                         <h2>The Basics</h2>

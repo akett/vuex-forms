@@ -3,8 +3,8 @@
         <h2>Webpack Configuration</h2>
         <p>
             This package makes use of HTML files for component templates. If you're using Webpack, you may need
-            to add an additional loader for HTML files to your webpack configuration (if you haven't already),
-            or Webpack will throw an error about not being able to parse .html files.
+            to add an additional loader for HTML files in your webpack configuration (if you haven't already),
+            otherwise Webpack will throw an error about not being able to parse .html files.
         </p>
         <p>
             I recommend using <a href="https://www.npmjs.com/package/html-loader">html-loader</a> for this task.
@@ -28,7 +28,7 @@
     ...
 }
 </code></pre>
-        <p>It should now work with your production build commands if it wasn't before.</p>
+        <p>It should now work with your production build commands if it wasn't working before.</p>
     </div>
 </template>
 

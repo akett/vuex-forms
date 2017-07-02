@@ -371,7 +371,13 @@ export default class Form {
                         // finally, replace any and all :param placeholders with the param's value
                         for (let param in params) {
                             if (params.hasOwnProperty(param)) {
-                                message = message.replace(":" + param, params[param])
+                                let replaceWith = JSON.parse(JSON.stringify(params[param]))
+                                if (param === 'array') {
+                                    let lastEl = replaceWith[replaceWith.length - 1]
+                                    replaceWith.splice(replaceWith.indexOf(lastEl), 1)
+                                    replaceWith = replaceWith.join(', ') + ' or ' + lastEl
+                                }
+                                message = message.replace(":" + param, replaceWith)
                             }
                         }
 

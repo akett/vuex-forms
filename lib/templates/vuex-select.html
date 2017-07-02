@@ -3,7 +3,6 @@
 
     <select :id="id"
             :name="name"
-            :value="value"
             :multiple="multiple"
             :disabled="disabled"
             :required="required"
@@ -11,7 +10,8 @@
             @blur="handleBlur"
             @focus="handleFocus"
             class="form-control">
-        <option v-for="option in options" :value="option[option_value]" v-text="option[option_name]"></option>
+        <option v-for="option in options" :value="option[option_value]" v-text="option[option_name]"
+                :selected="checkSelected(option[option_value])"></option>
     </select>
     <ul class="form-errors" v-if="fieldErrors">
         <li v-for="error in fieldErrors">{{ error }}</li>

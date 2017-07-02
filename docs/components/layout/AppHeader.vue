@@ -5,7 +5,7 @@
                 <img src="../../assets/logo.png" class="logo">
                 <h1 class="header-title">
                     Vuex<span class="lighter">Forms</span>
-                    <span class="version">v0.0.5 (alpha)</span>
+                    <span class="version">v0.0.6 (alpha)</span>
                 </h1>
             </div>
             <p class="slogan">
@@ -32,11 +32,11 @@
                             <li>Robust validation, powered by <a
                                     href="https://monterail.github.io/vuelidate/">Vuelidate</a>
                             </li>
-                            <li>20+ <a href="https://laravel.com/">Laravel</a> inspired validations (coming soon!)</li>
-                            <li>Built-in validation message system</li>
+                            <li>Capable validation message system</li>
                             <li>Custom validation rules & messages</li>
                             <li>Localization for messages</li>
                             <li>Configurable validation behavior</li>
+                            <li>Provides 28 validation rules out of the box (including Vuelidate's existing rules)</li>
                             <li>
                                 Minimal dependencies
                                 <br/>
