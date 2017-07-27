@@ -1,6 +1,6 @@
 {
   "name": "vuex-forms",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Comprehensive form management for Vue.js, built with Vuex in mind.",
   "author": "Andy Crockett",
   "main": "lib/index.js",

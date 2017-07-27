@@ -29,6 +29,6 @@
            @focus="handleFocus"
            class="form-control">
     <ul class="form-errors" v-if="fieldErrors">
-        <li v-for="error in fieldErrors">{{ error }}</li>
+        <li v-for="(error, index) in fieldErrors" :key="index">{{ error }}</li>
     </ul>
 </div>
